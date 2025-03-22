@@ -1,0 +1,85 @@
+<script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+
+
+<!-- views/partials/navbar.ejs -->
+
+<aside class="w-20 bg-warm border-r border-orange-100 flex flex-col items-center py-6 fixed h-screen">
+    <div class="w-12 h-12 flex items-center justify-center text-primary mb-8">
+        <i class="ri-fire-fill ri-2x"></i><br>
+        <h2 class="text-xs">RishiVerse</h2>
+    </div>
+    <nav class="flex flex-col gap-8">
+        <a href="rishis" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+            <i class="ri-home-5-line ri-xl"></i>
+            Home
+        </a>
+        <a href="category" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+            <i class="ri-apps-2-line ri-xl"></i>
+            Category
+        </a>
+        <a href="collection" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+            <i class="ri-book-open-line ri-xl"></i>
+            Collection
+        </a>
+        <a href="download" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+            <i class="ri-download-line ri-xl"></i>
+            Download
+        </a>
+        <a href="login" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+            <i class="ri-login-line ri-xl"></i>
+            Login
+        </a>
+        <a href="signup" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+            <i class="ri-user-add-line ri-xl"></i>
+            Signup
+        </a>
+    </nav>
+</aside>
+<style>
+    :where([class^="ri-"])::before { content: "\f3c2"; }
+    .book-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 2rem;
+    }
+    .category-scroll::-webkit-scrollbar {
+        display: none;
+       
+    } 
+    .signup-container {
+    margin-top: 0px; /* Push it to the top */
+    padding-top: 20px; /* Adjust spacing */
+    height: 100vh; /* Make it take full height */
+    display: flex;
+    align-items: flex-start; /* Align content to top */
+    justify-content: center; /* Center horizontally */
+}
+
+</style>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#f97316',
+                    secondary: '#fde047',
+                    warm: '#fef3c7'
+                },
+                borderRadius: {
+                    'none': '0px',
+                    'sm': '4px',
+                    DEFAULT: '8px',
+                    'md': '12px',
+                    'lg': '16px',
+                    'xl': '20px',
+                    '2xl': '24px',
+                    '3xl': '32px',
+                    'full': '9999px',
+                    'button': '8px'
+                }
+            }
+        }
+    }
+</script>
+

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background:rgb(255 241 196);
+            display: flex;
+            height: 100vh;
+            border-top-left-radius: #030100;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 80px;
+            background: rgb(255 241 196);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            border-right: 1px solid #030100;
+        }
+
+        .sidebar img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        /* Main content */
+        .container {
+            display: flex;
+            flex: 1;
+            padding: 30px;
+            gap: 20px;
+        }
+
+        .content {
+            flex: 2;
+            background: rgb(255 241 196);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #0a0500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .content img {
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            margin: 15px 0;
+        }
+
+        .content p {
+            font-size: 14px;
+            color: #191717;
+            width: 80%;
+        }
+
+        /* Signup Form */
+        .signup {
+            flex: 1;
+            background: rgb(255 241 196);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #0b0601;
+        }
+
+        .signup h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .signup p {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .social-btn {
+            background: rgb(255 241 196);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .social-btn img {
+            width: 18px;
+            margin-right: 10px;
+        }
+
+        .or {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid rgb(255 241 196);
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .password-recovery {
+            text-align: right;
+            font-size: 12px;
+            color: #FF5733;
+            text-decoration: none;
+        }
+
+        .continue-btn {
+            width: 100%;
+            background: #FF5733;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .continue-btn:hover {
+            background: #E64A19;
+        }
+    </style>
+    
+</head>
+<body>
+    <%- include('./partials/layout') %><!-- Include the navbar partial -->
+    <main class="flex-1 ml-20 p-8">
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content">
+            <img src="./public/images/image.png" alt="Illustration">
+            <h2>Immersive Reading Mode</h2>
+            <p>A synchronized ebook and audiobook feature where users can listen to the narration while the text is highlighted, offering a seamless reading and listening experience.</p>
+        </div>
+
+        <!-- Signup Section -->
+        <div class="signup">
+            <h2>Create an Account</h2>
+            <p>One subscription for Litverse, Recognotes, and Sparks</p>
+
+            <div class="social-buttons">
+                <div class="social-btn"><img src="google-icon.png" alt=""> Continue with Google</div>
+                <div class="social-btn"><img src="facebook-icon.png" alt=""> Continue with Facebook</div>
+                <div class="social-btn"><img src="apple-icon.png" alt=""> Continue with Apple</div>
+            </div>
+
+            <p class="or">or sign up with</p>
+
+            <input type="email" class="input-field" placeholder="Email address">
+            <input type="password" class="input-field" placeholder="Password">
+
+            <a href="#" class="password-recovery">Recovery Password</a>
+
+            <button class="continue-btn">Continue</button>
+        </div>
+    </div>
+<script src="../login.js"></script>
+</body>
+</html>

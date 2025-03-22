@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RishiVerse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+</head>
+<body class="bg-warm">
+    <%- include('partials/layout') %>  <!-- Include the navbar partial -->
+        <!-- Main Content -->
+        <main class="flex-1 ml-20 p-8">
+            <!-- Search Bar -->
+            <div class="bg-secondary rounded-lg p-4 mb-8">
+                <div class="bg-rgb(254 243 199) rounded-lg flex items-center px-4 py-2">
+                    <i class="ri-search-line text-gray-400 mr-2"></i>
+                    <input type="text" placeholder="Title, author, host, or topic" class="w-full outline-none text-gray-700">
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="mb-12">
+                <h2 class="text-xl font-semibold mb-4">Categories</h2>
+                <div class="category-scroll flex gap-4 overflow-x-auto pb-4">
+                    <button class="bg-primary text-white px-6 py-2 rounded-full whitespace-nowrap">Everything</button>
+                    <button class="border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-50 whitespace-nowrap">Ebooks</button>
+                    <button class="border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-50 whitespace-nowrap">Audiobooks</button>
+                    <button class="border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-50 whitespace-nowrap">Scientific research</button>
+                    <button class="border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-50 whitespace-nowrap">Quizes</button>
+                </div>
+            </div>
+
+            <!-- Popular Books -->
+            <div>
+                <h2 class="text-xl font-semibold mb-6">Popular Books</h2>
+                <div class="book-grid">
+                    <div class=" grid-cols-2 bg-rgb(255 241 196) p-4 rounded-lg border-box-black">
+                        <img src="https://public.readdy.ai/ai/img_res/3b927d011f94f2a2f85a81e8996414c9.jpg" alt="The Great Gatsby" class="w-full h-64 object-cover rounded-lg mb-4">
+                        <h3 class="font-semibold mb-1">The Great Gatsby</h3>
+                        <p class="text-gray-600 text-sm mb-2">F. Scott Fitzgerald</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-primary">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <button class="text-gray-400 hover:text-primary">
+                                <i class="ri-bookmark-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+   <script src="/final_project/rishis.js"></script>
+</body>
+</html>
+  
