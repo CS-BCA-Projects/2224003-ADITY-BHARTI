@@ -1,0 +1,36 @@
+<%- include('partials/layout') %> <!-- Include Navbar -->
+
+<main class="flex-1 p-8 bg-gray-100 min-h-screen flex flex-col items-center">
+    <div class="bg-white shadow-lg rounded-xl p-8 max-w-3xl w-full">
+        
+        <!-- Book Title -->
+        <h1 class="text-3xl font-bold text-gray-800 mb-2 text-center"><%= book.title %></h1>
+        <p class="text-lg text-gray-600 text-center">by <span class="font-semibold"><%= book.author %></span></p>
+        <p class="text-sm text-gray-500 text-center mb-4">Genre: <span class="text-orange-600 font-medium"><%= book.genre %></span></p>
+
+        <!-- Book Cover -->
+        <div class="flex justify-center mb-6">
+            <img src="<%= book.coverImage %>" alt="<%= book.title %>" class="w-48 h-64 object-cover rounded-lg shadow-md">
+        </div>
+
+        <!-- Book Description -->
+        <p class="text-gray-700 leading-relaxed mb-6 text-center"><%= book.description %></p>
+
+        <!-- Call-to-Action Buttons -->
+        <div class="flex justify-center gap-4">
+            <a href="<%= book.readLink %>" 
+               class="px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition">
+                📖 Read Now
+            </a>
+            <a href="<%= book.pdfLink %>" download 
+               class="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition">
+                ⬇️ Download PDF
+            </a>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="text-center p-4 text-gray-600 mt-8">
+    &copy; 2025 Rishiverse - Ancient Indian Culture eBooks
+</footer>

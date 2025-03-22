@@ -1,118 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - RishiVerse</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body {
-            background-color: rgb(255 241 196); /* Beige Background */
-            font-family: 'Poppins', sans-serif;
-        }
-        .highlight {
-            background-color: #f0a678;
-            color: rgba(249, 192, 113, 0.849);
+            background-color: rgb(255 241 196);
+            font-family: 'Arial', sans-serif;
         }
     </style>
-    <style>
-        :where([class^="ri-"])::before { content: "\f3c2"; }
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 2rem;
-        }
-        .category-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        /* Assuming your sidebar has a fixed width of 200px */
-.container {
-    margin-left: 150px;  /* Adjust this to match your sidebar width */
-    padding: 25px;  /* Add some padding for spacing */
-}
-</style>
-
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    primary: '#f97316',
-                    secondary: '#fde047',
-                    warm: '#fef3c7'
-                },
-                borderRadius: {
-                    'none': '0px',
-                    'sm': '4px',
-                    DEFAULT: '8px',
-                    'md': '12px',
-                    'lg': '16px',
-                    'xl': '20px',
-                    '2xl': '24px',
-                    '3xl': '32px',
-                    'full': '9999px',
-                    'button': '8px'
-                }
-            }
-        }
-    }
-</script>
-    
 </head>
+
 <body>
-    <%- include('./partials/layout') %>
+    <%- include('partials/layout') %> <!-- Include Navbar -->
+
     <main class="flex-1 ml-20 p-8">
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold mb-6">Categories</h1>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Fiction</h2>
-                <p class="text-gray-700">Explore a wide range of fictional books.</p>
-            </div>
-            <div class="bg-#fbedc9  p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Non-Fiction</h2>
-                <p class="text-gray-700">Discover the best non-fiction books.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg">
-                <h2 class="text-xl font-bold mb-2">Mystery</h2>
-                <p class="text-gray-700">Dive into thrilling mystery novels.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Science Fiction</h2>
-                <p class="text-gray-700">Explore futuristic and science-based stories.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Fantasy</h2>
-                <p class="text-gray-700">Enter magical and fantastical worlds.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Romance</h2>
-                <p class="text-gray-700">Read heartwarming romance novels.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Horror</h2>
-                <p class="text-gray-700">Get spooked with horror stories.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Biography</h2>
-                <p class="text-gray-700">Learn about the lives of notable people.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Self-Help</h2>
-                <p class="text-gray-700">Improve yourself with self-help books.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">History</h2>
-                <p class="text-gray-700">Explore historical events and figures.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Children's</h2>
-                <p class="text-gray-700">Find books for young readers.</p>
-            </div>
-            <div class="bg-#fbedc9 p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-2">Poetry</h2>
-                <p class="text-gray-700">Enjoy beautiful and thought-provoking poems.</p>
-            </div>
+        <h1 class="text-4xl font-bold text-center mb-6">Explore Indian Cultural Genres</h1>
+        <p class="text-lg text-center text-gray-600 mb-8">Discover books from ancient scriptures, mythology, and historical texts.</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Category Links -->
+            <a href="/books/ancient-scriptures" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">📜 Ancient Scriptures</h2>
+                <p class="text-gray-600">Vedas, Upanishads, and Puranas.</p>
+            </a>
+
+            <a href="/books/mythology" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">🕉️ Mythology</h2>
+                <p class="text-gray-600">Stories from Ramayana & Mahabharata.</p>
+            </a>
+
+            <a href="/books/history" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">🏰 Indian History</h2>
+                <p class="text-gray-600">Ancient and medieval historical texts.</p>
+            </a>
+
+            <a href="/books/literature" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">📖 Literature</h2>
+                <p class="text-gray-600">Classic works of Kalidasa, Tulsidas, and more.</p>
+            </a>
+
+            <a href="/books/spirituality-yoga" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">🧘 Spirituality & Yoga</h2>
+                <p class="text-gray-600">Bhagavad Gita, Yoga Sutras, and meditation.</p>
+            </a>
+
+            <a href="/books/ayurveda" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">🌿 Ayurveda</h2>
+                <p class="text-gray-600">Charaka Samhita & Sushruta Samhita.</p>
+            </a>
+
+            <a href="/books/vedic-science" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">🔭 Vedic Science</h2>
+                <p class="text-gray-600">Astronomy, mathematics, and ancient knowledge.</p>
+            </a>
+
+            <a href="/books/art-music" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">🎭 Art & Music</h2>
+                <p class="text-gray-600">Natya Shastra, classical dance, and music.</p>
+            </a>
+
+            <a href="/books/philosophy" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
+                <h2 class="text-xl font-semibold">📚 Philosophy</h2>
+                <p class="text-gray-600">Advaita Vedanta, Jainism, and Buddhism.</p>
+            </a>
         </div>
-    </div>
-   </html>
+    </main>
+</body>
+</html>

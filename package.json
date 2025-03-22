@@ -1,12 +1,27 @@
 {
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-validator": "^6.14.0",
+    "fs": "^0.0.1-security",
     "mongodb": "^6.14.2",
     "mongoose": "^8.12.1",
-    "nodemon": "^3.1.9"
-  }
+    "multer": "^1.4.5-lts.2",
+    "nodemon": "^3.1.9",
+    "path": "^0.12.7"
+  },
+  "name": "final_project",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u00002\u00002\u00002\u00004\u00000\u00000\u00003\u0000-\u0000A\u0000D\u0000I\u0000T\u0000Y\u0000-\u0000B\u0000H\u0000A\u0000R\u0000T\u0000I\u0000\r\u0000 \u0000#\u0000 \u0000R\u0000i\u0000s\u0000h\u0000i\u0000V\u0000e\u0000r\u0000s\u0000e\u0000\r\u0000 \u0000",
+  "main": "Insertbooks.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

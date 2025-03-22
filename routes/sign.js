@@ -1,37 +1,40 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user'); 
-const { body, validationResult } = require('express-validator'); // Import express-validator
+const { body} = require('express-validator');
+const bcrypt = require('bcrypt');
 
-// Adjust the path as needed
+router.get('/', (req, res) => res.render('signup')); // Renders Signup Page
 
-router.post('/signup', [
+router.post('/', [
     body('email').isEmail().withMessage('Please enter a valid email address.'),
     body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long.'),
-    body('profession').notEmpty().withMessage('Profession is required.'),
-    body('feildofworkstudy').notEmpty().withMessage('Field of work/study is required.')
-], async (req, res) => { // Added `async` here
-   const { email, password, profession, feildofworkstudy } = req.body;
-   const errors = validationResult(req); // Validate input
-   if (!errors.isEmpty()) {
-       return res.status(400).json({ errors: errors.array() }); // Return validation errors
-   }
-   console.log(email, password, profession, feildofworkstudy);
-   try {
+    body('Profession').notEmpty().withMessage('Profession is required.'),
+    body('Study').notEmpty().withMessage('Field of work/study is required.')
+], async (req, res) => {
+  
+  
+    const { email, password, Profession, Study } = req.body;
+   
+    
+    try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
         
-        const newUser = new User({ email, password, profession, feildofworkstudy });
-        await newUser.save();  // `await` now works properly inside async function
+        // Hash the password before saving
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = await User.create({ email, password: hashedPassword, Profession, Study });
 
         res.status(201).json({ 
             message: 'User registered successfully!',
             user: { email: newUser.email }
         });
+
     } catch (error) {
-        console.error('Error saving user:', error.message); // Improved logging
+        console.error('Error saving user:', error.message);
         res.status(500).json({ message: 'Server error' });
     }
 });

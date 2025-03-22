@@ -1,0 +1,85 @@
+[
+  {
+      "title": "Rig Veda",
+      "author": "Unknown (Ancient Rishis)",
+      "description": "The Rig Veda is one of the oldest scriptures, composed in Vedic Sanskrit. It contains hymns dedicated to various deities.",
+      "link": "/books/ancient/rig-veda"
+  },
+  {
+      "title": "Bhagavad Gita",
+      "author": "Vyasa",
+      "description": "A 700-verse Hindu scripture that is part of the Mahabharata, offering spiritual wisdom and guidance.",
+      "link": "/books/ancient/bhagavad-gita"
+  },
+
+ {
+      "title": "Patanjali Yoga Sutras",
+      "author": "Patanjali",
+      "description": "A foundational text on the theory and practice of Yoga, detailing the eight limbs of Yoga.",
+      "link": "/books/spirituality/yoga-sutras"
+  },
+  {
+      "title": "Upanishads",
+      "author": "Various Sages",
+      "description": "Philosophical texts that explore the nature of reality and self-awareness, forming the basis of Vedanta.",
+      "link": "/books/spirituality/upanishads"
+  },
+
+  
+    {
+        "title": "Charaka Samhita",
+        "author": "Charaka",
+        "description": "An ancient text on Ayurveda that describes various medical treatments and holistic healing methods.",
+        "link": "/books/ayurveda/charaka-samhita"
+    },
+    {
+        "title": "Sushruta Samhita",
+        "author": "Sushruta",
+        "description": "A classical Sanskrit text on medicine and surgery, detailing surgical techniques and treatments.",
+        "link": "/books/ayurveda/sushruta-samhita"
+    },
+
+      {
+          "title": "Surya Siddhanta",
+          "author": "Unknown (Ancient Astronomers)",
+          "description": "An ancient Sanskrit text on astronomy and mathematics, describing planetary motions.",
+          "link": "/books/vedic-science/surya-siddhanta"
+      },
+      {
+          "title": "Vaastu Shastra",
+          "author": "Various",
+          "description": "A traditional Indian system of architecture and design principles based on natural laws.",
+          "link": "/books/vedic-science/vaastu-shastra"
+      },
+
+        {
+            "title": "Arthashastra",
+            "author": "Chanakya",
+            "description": "A treatise on statecraft, economic policy, and military strategy in ancient India.",
+            "link": "/books/history/arthashastra"
+        },
+        {
+            "title": "Ramayana",
+            "author": "Valmiki",
+            "description": "An epic poem narrating the life of Lord Rama, Sita, and their adventures.",
+            "link": "/books/history/ramayana"
+        },
+
+          {
+              "title": "Natya Shastra",
+              "author": "Bharata Muni",
+              "description": "An ancient text on performing arts, covering theatre, dance, and music.",
+              "link": "/books/more/natya-shastra"
+          },
+          {
+              "title": "Panchatantra",
+              "author": "Vishnu Sharma",
+              "description": "A collection of fables with moral lessons, widely regarded as one of the earliest works of storytelling.",
+              "link": "/books/more/panchatantra"
+          }
+      ]
+            
+    
+  
+  
+

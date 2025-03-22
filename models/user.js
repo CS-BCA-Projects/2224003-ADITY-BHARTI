@@ -4,16 +4,15 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    profession : {
-
+    Profession : {
         type : String,
         required : true,
         enum : ["Student","Teacher","Researcher","Writer","Librarian","Other"]
     },
-    feildofworkstudy:{
+    Study:{
         type:String,
         required:true,
-        enum:["Art & Humanities","Science & Technology","Social Sciences","Business & Economics","Health & Medicine","Engineering & Technology","Other"]
+        enum:["arts", "science", "social sciences", "business", "education", "medicine", "engineering", "other"]
     }
 });
 
@@ -24,5 +23,5 @@ userSchema.pre('save', async function(next) {
     next();
 });
 
-const User = mongoose.model('Users', userSchema);
+const User = mongoose.model('User', userSchema);
 module.exports = User;

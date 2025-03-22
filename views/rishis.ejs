@@ -5,8 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RishiVerse</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(255 241 196);
+            font-family: 'Arial', sans-serif;
+        }
+    
+        .category-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            flex-wrap: wrap; /* Ensures it stays in one row */
+            margin-top: 10px;
+        }
+    
+        .category-box {
+            background-color: rgb(255 241 196);
+            border-radius: 8px;
+            padding: 0.5rem;
+            display: flex;
+             
+            flex-direction: column;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 110px; /* Small box width */
+            height: 70px; /* Slightly taller to fit text */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .category-box i {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+    
+        .category-box h2 {
+            font-size: 0.75rem;
+            white-space: nowrap; /* Keeps text from breaking */
+        }
+    
+        .category-box:hover {
+            background-color: orange;
+            transform: translateY(-2px);
+        }
+    </style>
+    
+  
 </head>
 <body class="bg-warm">
     <%- include('partials/layout') %>  <!-- Include the navbar partial -->
@@ -19,18 +63,40 @@
                     <input type="text" placeholder="Title, author, host, or topic" class="w-full outline-none text-gray-700">
                 </div>
             </div>
-
-            <!-- Categories -->
-            <div class="mb-12">
-                <h2 class="text-xl font-semibold mb-4">Categories</h2>
-                <div class="category-scroll flex gap-4 overflow-x-auto pb-4">
-                    <button class="bg-primary text-white px-6 py-2 rounded-full whitespace-nowrap">Everything</button>
-                    <button class="border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-50 whitespace-nowrap">Ebooks</button>
-                    <button class="border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-50 whitespace-nowrap">Audiobooks</button>
-                    <button class="border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-50 whitespace-nowrap">Scientific research</button>
-                    <button class="border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-50 whitespace-nowrap">Quizes</button>
-                </div>
+            <h1 class="text-2xl font-bold ">Categories</h1>
+    
+            <div class="category-container">
+                <a href="/category/books/ancient-scriptures" class="category-box">
+                    <i class="ri-book-open-line text-orange-600"></i>
+                    <h2>Ancient</h2>
+                </a>
+            
+                <a href="/books/spirituality-yoga" class="category-box">
+                    <i class="ri-meditation-line text-blue-600"></i>
+                    <h2>Spirituality</h2>
+                </a>
+            
+                <a href="/books/ayurveda" class="category-box">
+                    <i class="ri-heart-pulse-line text-green-500"></i>
+                    <h2>Ayurveda</h2>
+                </a>
+            
+                <a href="/books/vedic-science" class="category-box">
+                    <i class="ri-flask-line text-purple-600"></i>
+                    <h2>Vedic Science</h2>
+                </a>
+            
+                <a href="/books/history" class="category-box">
+                    <i class="ri-ancient-pavilion-line text-yellow-600"></i>
+                    <h2>Indian History</h2>
+                </a>
+            
+                <a href="./category" class="category-box">
+                    <i class="ri-more-fill text-gray-500"></i>
+                    <h2>More</h2>
+                </a>
             </div>
+            
 
             <!-- Popular Books -->
             <div>
@@ -43,12 +109,10 @@
                         <div class="flex items-center justify-between">
                             <div class="flex text-primary">
                                 <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
+                               
                             </div>
                             <button class="text-gray-400 hover:text-primary">
+                                <a href="./collection.ejs"></a>
                                 <i class="ri-bookmark-line"></i>
                             </button>
                         </div>

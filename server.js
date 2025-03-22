@@ -1,86 +1,93 @@
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
+const multer = require("multer");
 dotenv.config({ path: './.env' });
-
-const { MongoClient } = require("mongodb");
-const MONGODB_URI = process.env.MONGODB_URI;
-
+const mongoose = require('mongoose');
+const cors = require("cors");
 const path = require('path');
-
-const connectDB = require('./DB/a.js');
+const Book = require('./models/Book');
+const Category = require('./models/Category');
+const connectDB = require('./DB/a.js'); // Ensuring only one DB connection
 const authRoutes = require('./routes/auth'); 
 const signRoutes = require('./routes/sign'); 
-const PORT = process.env.PORT || 5000;
-const client = new MongoClient(MONGODB_URI);
-// Middleware to parse JSON and URL-encoded data
+
+const PORT = process.env.PORT || 5001;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://adity07:mongoose123@cluster0.nt08p.mongodb.net/RishiVerse";
+
+// ✅ **Connect to MongoDB - Only Once**
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.error("❌ MongoDB Connection Error:", err));
+
+// ✅ **Middleware**
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Set up EJS as the templating engine
+app.use(cors());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 
+// ✅ **Routes Setup**
+app.use('/sign', signRoutes);
+app.use('/login', authRoutes);
+app.use('/api', require('./routes/sign'));
+app.use('/api', require('./routes/auth'));
+
+// ✅ **Error Handling Middleware**
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: "Something went wrong!" });
+});
 
 
-// Routes
-app.use('/api', signRoutes);
-app.use('/auth', authRoutes);
 
-// app.use('/api', require('./routes/sign'));
-// app.use('/api', require('./routes/auth'));
+// ✅ **File Upload Setup (Multer)**
+/*const storage = multer.diskStorage({
+    destination: "./uploads",
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }*/
+//});
+//const upload = multer({ storage: storage });
 
-// Render views
-app.get('/category', (req, res) => res.render('category'));
+// ✅ **UPLOAD PAGE**
+//app.get("/upload", (req, res) => {
+  //  res.render("upload");
+//});
+
+// ✅ **FILE UPLOAD**
+/*app.post("/upload", upload.single("file"), async (req, res) => {
+    try {
+        const { title, author, description } = req.body;
+        const filePath = req.file.filename;
+
+        const newBook = new Book({ title, author, description, contentUrl: `/uploads/${filePath}` });
+        await newBook.save();
+
+        res.redirect("/books");
+    } catch (error) {
+        console.error("❌ Upload Error:", error);
+        res.status(500).send("File Upload Failed.");
+    }
+});*/
+app.get("/books", async (req, res) => {
+    try {
+        const books = await Book.find(); // Fetch all books from MongoDB
+        res.render("books", { books });  // Pass books to EJS template
+    } catch (err) {
+        console.error("❌ Error fetching books:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+// ✅ **Render Other Pages**
 app.get('/collection', (req, res) => res.render('collection'));
 app.get('/download', (req, res) => res.render('download'));
 app.get('/login', (req, res) => res.render('login'));
 app.get('/rishis', (req, res) => res.render('rishis'));
-app.get('/signup', (req, res) => res.render('signup'));
+app.get('/category', (req, res) => res.render('category'));
 
-// Redirect POST requests
-// app.post('/signup', (req, res) => res.redirect(307, '/api/signup'));
-// app.post('/login', (req, res) => res.redirect(307, '/auth/login'));
-
-// Database connection
-connectDB();
-
-app.post('/Insertbooks', async (req, res) => {
-    try {
-        await client.connect();
-        const database = client.db("RishiVerse");
-        const books = database.collection("books");
-
-        // Get book data from the request body
-        const bookData = req.body;
-
-        // Insert into MongoDB
-        const result = await books.insertOne(bookData);
-        res.status(201).json({ message: "Book inserted", bookId: result.insertedId });
-    } catch (error) {
-        console.error("Error inserting book:", error.message);
-
-        res.status(500).json({ error: "Failed to insert book" });
-    } finally {
-        await client.close();
-    }
-});
-
-app.get('/books', async (req, res) => {
-    try {
-        await client.connect();
-        const database = client.db("RishiVerse");
-        const books = database.collection("books");
-
-        const allBooks = await books.find({}).toArray();
-        res.status(200).json(allBooks);
-    } catch (error) {
-        console.error("Error fetching books:", error.message);
-
-        res.status(500).json({ error: "Failed to fetch books" });
-    }
-});
-
-// Start the server
+// ✅ **Start Server**
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

@@ -5,15 +5,15 @@ const bcrypt = require('bcrypt');
 
 // Login route
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { Email, Password } = req.body;
 
     // Check if email and password exist in the request
-    if (!email || !password) {
+    if (!Email || !Password) {
         return res.status(400).json({ message: 'Email and password are required' });
     }
 
     try {
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ email: Email });
          console.log()
         // Check if user exists
         if (!user) {
@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Check password using bcrypt
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(Password, user.Password);
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid email ' });
         }
