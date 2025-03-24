@@ -1,49 +1,90 @@
-const mongoose = require('mongoose');
-const fs = require('fs');
-const Book = require('./models/Book');
-const Category = require('./models/Category');
+const mongoose = require("mongoose");
+const fs = require("fs");
+const path = require("path");
+const Book = require("./models/Book"); // Ensure model paths are correct
+const Category = require("./models/Category"); // Use lowercase if file name is lowercase
 
-const uri = "mongodb+srv://adity07:mongoose123@cluster0.nt08p.mongodb.net/RishiVerse";
+// ✅ Replace with your actual MongoDB URI
+const mongoURI = 'mongodb+srv://adity07:mongoose123@cluster0.nt08p.mongodb.net/RishiVerse';
 
 // Connect to MongoDB
-mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.error("❌ MongoDB Connection Error:", err));
-
-const booksData = JSON.parse(fs.readFileSync('book.json', 'utf-8'));
-
-const importData = async () => {
+async function connectDB() {
     try {
-        await Book.deleteMany();
-        await Category.deleteMany();
+        await mongoose.connect(mongoURI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log("✅ MongoDB Connected");
+    } catch (error) {
+        console.error("❌ MongoDB Connection Error:", error);
+        process.exit(1);
+    }
+}
 
-        const categoryMap = {}; // Store created categories
+// Load JSON Data
+function loadJSON(filename) {
+    try {
+        const filePath = path.join(__dirname, filename);
+        return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    } catch (error) {
+        console.error(`❌ Error loading ${filename}:`, error);
+        return null;
+    }
+}
 
+// Import Data into MongoDB
+async function importData() {
+    try {
+        await connectDB();
+
+        // ✅ Load books from JSON file
+        const booksData = loadJSON("book.json");
+        if (!booksData) {
+            console.error("❌ No book data found.");
+            return;
+        }
+
+        // ✅ Fix: Create Categories First
+        const categoryMap = {};
         for (const book of booksData) {
             if (!categoryMap[book.genre]) {
-                const newCategory = await Category.create({ name: book.genre });
-                categoryMap[book.genre] = newCategory._id;
+                let category = await Category.findOne({ name: book.genre });
+
+                // ✅ Fix: Check if category exists
+                if (!category) {
+                    category = new Category({ name: book.genre });
+
+                    // ✅ Fix: Validate before saving
+                    try {
+                        await category.save();
+                        console.log(`✅ Created Category: ${book.genre}`);
+                    } catch (err) {
+                        console.error(`❌ Category validation error for ${book.genre}:`, err.message);
+                        continue; // Skip invalid categories
+                    }
+                }
+
+                categoryMap[book.genre] = category._id;
             }
         }
 
+        // ✅ Insert Books with Category References
         const booksToInsert = booksData.map(book => ({
             title: book.title,
             author: book.author,
             genre: categoryMap[book.genre], // Assign category ID
-            description: book.description || "No description available.",
-            contentUrl: book.contentUrl || ""
+            description: book.description || "No description available",
+            contentUrl: book.contentUrl || "#"
         }));
 
         await Book.insertMany(booksToInsert);
+        console.log(`✅ Successfully imported ${booksToInsert.length} books.`);
 
-        console.log("✅ Data Imported Successfully!");
-        process.exit();
+        mongoose.connection.close();
+        console.log("✅ MongoDB Connection Closed.");
     } catch (error) {
         console.error("❌ Error Importing Data:", error);
-        process.exit(1);
     }
-};
+}
 
-importData();
+importData(); // Run the import script

@@ -1,92 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RishiVerse</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body {
             background-color: rgb(255 241 196);
             font-family: 'Arial', sans-serif;
         }
-    
+
         .category-container {
             display: flex;
             justify-content: flex-start;
             gap: 10px;
-            flex-wrap: wrap; /* Ensures it stays in one row */
+            flex-wrap: wrap;
+            /* Ensures it stays in one row */
             margin-top: 10px;
         }
-    
+
         .category-box {
             background-color: rgb(255 241 196);
             border-radius: 8px;
             padding: 0.5rem;
             display: flex;
-             
+
             flex-direction: column;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            width: 110px; /* Small box width */
-            height: 70px; /* Slightly taller to fit text */
+            width: 110px;
+            /* Small box width */
+            height: 70px;
+            /* Slightly taller to fit text */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-    
+
         .category-box i {
             font-size: 1.2rem;
             margin-bottom: 4px;
         }
-    
+
         .category-box h2 {
             font-size: 0.75rem;
-            white-space: nowrap; /* Keeps text from breaking */
+            white-space: nowrap;
+            /* Keeps text from breaking */
         }
-    
+
         .category-box:hover {
             background-color: orange;
             transform: translateY(-2px);
         }
     </style>
-    
-  
+
+
 </head>
+
 <body class="bg-warm">
-    <%- include('partials/layout') %>  <!-- Include the navbar partial -->
+    <%- include('partials/layout') %> <!-- Include the navbar partial -->
         <!-- Main Content -->
         <main class="flex-1 ml-20 p-8">
             <!-- Search Bar -->
             <div class="bg-secondary rounded-lg p-4 mb-8">
                 <div class="bg-rgb(254 243 199) rounded-lg flex items-center px-4 py-2">
                     <i class="ri-search-line text-gray-400 mr-2"></i>
-                    <input type="text" placeholder="Title, author, host, or topic" class="w-full outline-none text-gray-700">
+                    <input type="text" placeholder="Title, author, host, or topic"
+                        class="w-full outline-none text-gray-700">
                 </div>
             </div>
             <h1 class="text-2xl font-bold ">Categories</h1>
-    
+
             <div class="category-container">
-                <a href="/category/books/ancient-scriptures" class="category-box">
+                <a href="/category/books/Ancient Scriptures" class="category-box">
                     <i class="ri-book-open-line text-orange-600"></i>
                     <h2>Ancient</h2>
                 </a>
             
-                <a href="/books/spirituality-yoga" class="category-box">
+                <a href="/category/books/Spirituality & Philosophy" class="category-box">
                     <i class="ri-meditation-line text-blue-600"></i>
                     <h2>Spirituality</h2>
                 </a>
             
-                <a href="/books/ayurveda" class="category-box">
+                <a href="/category/books/Ayurveda" class="category-box">
                     <i class="ri-heart-pulse-line text-green-500"></i>
                     <h2>Ayurveda</h2>
                 </a>
             
-                <a href="/books/vedic-science" class="category-box">
+                <a href="/category/books/Vedic Science" class="category-box">
                     <i class="ri-flask-line text-purple-600"></i>
                     <h2>Vedic Science</h2>
                 </a>
             
-                <a href="/books/history" class="category-box">
+                <a href="/category/books/Indian History & Epics" class="category-box">
                     <i class="ri-ancient-pavilion-line text-yellow-600"></i>
                     <h2>Indian History</h2>
                 </a>
@@ -103,13 +110,14 @@
                 <h2 class="text-xl font-semibold mb-6">Popular Books</h2>
                 <div class="book-grid">
                     <div class=" grid-cols-2 bg-rgb(255 241 196) p-4 rounded-lg border-box-black">
-                        <img src="https://public.readdy.ai/ai/img_res/3b927d011f94f2a2f85a81e8996414c9.jpg" alt="The Great Gatsby" class="w-full h-64 object-cover rounded-lg mb-4">
+                        <img src="https://public.readdy.ai/ai/img_res/3b927d011f94f2a2f85a81e8996414c9.jpg"
+                            alt="The Great Gatsby" class="w-full h-64 object-cover rounded-lg mb-4">
                         <h3 class="font-semibold mb-1">The Great Gatsby</h3>
                         <p class="text-gray-600 text-sm mb-2">F. Scott Fitzgerald</p>
                         <div class="flex items-center justify-between">
                             <div class="flex text-primary">
                                 <i class="ri-star-fill"></i>
-                               
+
                             </div>
                             <button class="text-gray-400 hover:text-primary">
                                 <a href="./collection.ejs"></a>
@@ -120,8 +128,102 @@
                 </div>
             </div>
         </main>
-    </div>
-   <script src="/final_project/rishis.js"></script>
+        </div>
+        <script>
+
+            // Handle bookmark toggle
+            document
+                .querySelectorAll(".text-gray-400.hover\\:text-primary")
+                .forEach((button, index) => {
+                    button.addEventListener("click", function () {
+                        this.classList.toggle("text-primary");
+                        this.classList.toggle("text-gray-400");
+                        const icon = this.querySelector("i");
+                        if (icon.classList.contains("ri-bookmark-line")) {
+                            icon.classList.remove("ri-bookmark-line");
+                            icon.classList.add("ri-bookmark-fill");
+                            mockBooks[index].bookmarked = true;
+                            // Show success toast
+                            const toast = document.createElement("div");
+                            toast.className =
+                                "fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform transition-transform duration-300 translate-y-0";
+                            toast.textContent = `${mockBooks[index].title} has been added to your bookmarks`;
+                            document.body.appendChild(toast);
+                            setTimeout(() => {
+                                toast.classList.add("translate-y-full");
+                                setTimeout(() => toast.remove(), 300);
+                            }, 2000);
+                        } else {
+                            icon.classList.remove("ri-bookmark-fill");
+                            icon.classList.add("ri-bookmark-line");
+                            mockBooks[index].bookmarked = false;
+                        }
+                    });
+                });
+            // Handle category selection
+            document.querySelectorAll(".category-scroll button").forEach((button) => {
+                button.addEventListener("click", function () {
+                    document.querySelectorAll(".category-scroll button").forEach((btn) => {
+                        btn.classList.remove("bg-primary", "text-white");
+                        btn.classList.add("border", "border-gray-300", "hover:bg-gray-50");
+                    });
+                    this.classList.remove("border", "border-gray-300", "hover:bg-gray-50");
+                    this.classList.add("bg-primary", "text-white");
+                });
+            });
+            // Handle search
+            const searchInput = document.querySelector('input[type="text"]');
+            searchInput.addEventListener("input", function (e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredBooks = mockBooks.filter(
+                    (book) =>
+                        book.title.toLowerCase().includes(searchTerm) ||
+                        book.author.toLowerCase().includes(searchTerm),
+                );
+                // Update UI with filtered books
+                const bookGrid = document.querySelector(".book-grid");
+                if (searchTerm.length > 0 && filteredBooks.length === 0) {
+                    bookGrid.innerHTML = `
+                    <div class="col-span-full text-center py-8 text-gray-500">
+                    No books found matching "${searchTerm}"
+                    </div>
+                    `;
+                }
+
+                async function fetchBooks() {
+                    try {
+                        const response = await fetch("http://localhost:3000/books"); // Fetch books from backend
+
+                        if (!response.ok) {
+                            throw new Error("No books found");
+                        }
+
+                        const books = await response.json();
+                        console.log("Fetched Books:", books); // Debugging in console
+
+                        const bookListDiv = document.getElementById("book-list");
+                        bookListDiv.innerHTML = books.map(book => `
+              <div>
+                  <h2>${book.title}</h2>
+                  <p><strong>Author:</strong> ${book.author}</p>
+                  <p><strong>Genre:</strong> ${book.genre}</p>
+                  <p><strong>Summary:</strong> ${book.summary}</p>
+                  <p><a href="${book.text_url}" target="_blank">📖 Read Book</a></p>
+                  ${book.audio_url ? `<p><a href="${book.audio_url}" target="_blank">🎧 Listen to Audiobook</a></p>` : ""}
+                  <hr>
+              </div>
+          `).join("");
+                    } catch (error) {
+                        console.error("Error fetching books:", error);
+                        document.getElementById("book-list").innerHTML = "<p>No books available.</p>";
+                    }
+                }
+
+                // Call fetchBooks when the page loads
+                window.onload = fetchBooks;
+
+            });
+        </script>
 </body>
+
 </html>
-  

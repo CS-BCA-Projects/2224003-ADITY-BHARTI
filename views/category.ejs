@@ -1,75 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - RishiVerse</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body {
-            background-color: rgb(255 241 196);
-            font-family: 'Arial', sans-serif;
+            background-color: rgb(255, 241, 196);
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
-
-<body>
+<body class="p-4">
     <%- include('partials/layout') %> <!-- Include Navbar -->
-
     <main class="flex-1 ml-20 p-8">
-        <h1 class="text-4xl font-bold text-center mb-6">Explore Indian Cultural Genres</h1>
-        <p class="text-lg text-center text-gray-600 mb-8">Discover books from ancient scriptures, mythology, and historical texts.</p>
+    <h1 class="text-4xl font-bold mb-8 text-center text-gray-800">Explore Books by Category</h1>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Category Links -->
-            <a href="/books/ancient-scriptures" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">📜 Ancient Scriptures</h2>
-                <p class="text-gray-600">Vedas, Upanishads, and Puranas.</p>
-            </a>
+    <% if (categories.length > 0) { %>
+        <% categories.forEach(category => { %>
+            <div class="mb-10">
+                <h2 class="text-2xl font-semibold mb-4 bg-yellow-400 p-3 rounded-md text-center shadow-lg">
+                    <%= category.name %> 📚
+                </h2>
 
-            <a href="/books/mythology" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">🕉️ Mythology</h2>
-                <p class="text-gray-600">Stories from Ramayana & Mahabharata.</p>
-            </a>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <% category.books.forEach(book => { %>
+                        <div class="bg- p-4 shadow-md rounded-lg border border-gray-300 transform transition duration-300 hover:scale-105">
+                            <h3 class="text-lg font-semibold text-gray-800"><%= book.title %></h3>
+                            <p class="text-gray-600 text-sm">by <strong><%= book.author %></strong></p>
+                            <p class="text-gray-500 text-sm line-clamp-2 mt-1"><%= book.description %></p>
 
-            <a href="/books/history" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">🏰 Indian History</h2>
-                <p class="text-gray-600">Ancient and medieval historical texts.</p>
-            </a>
-
-            <a href="/books/literature" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">📖 Literature</h2>
-                <p class="text-gray-600">Classic works of Kalidasa, Tulsidas, and more.</p>
-            </a>
-
-            <a href="/books/spirituality-yoga" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">🧘 Spirituality & Yoga</h2>
-                <p class="text-gray-600">Bhagavad Gita, Yoga Sutras, and meditation.</p>
-            </a>
-
-            <a href="/books/ayurveda" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">🌿 Ayurveda</h2>
-                <p class="text-gray-600">Charaka Samhita & Sushruta Samhita.</p>
-            </a>
-
-            <a href="/books/vedic-science" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">🔭 Vedic Science</h2>
-                <p class="text-gray-600">Astronomy, mathematics, and ancient knowledge.</p>
-            </a>
-
-            <a href="/books/art-music" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">🎭 Art & Music</h2>
-                <p class="text-gray-600">Natya Shastra, classical dance, and music.</p>
-            </a>
-
-            <a href="/books/philosophy" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg cursor-pointer block">
-                <h2 class="text-xl font-semibold">📚 Philosophy</h2>
-                <p class="text-gray-600">Advaita Vedanta, Jainism, and Buddhism.</p>
-            </a>
-        </div>
-    </main>
+                            <div class="mt-4 flex justify-between items-center">
+                                <a href="/book/<%= book._id %>" class="text-black-500 hover:underline">Read More</a>
+                                <a href="<%= book.contentUrl %>" target="_blank" class="bg-orange-500 text-white px-3 py-1 rounded-md hover:bg-orange-300">
+                                    📖 Open PDF
+                                </a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p class="text-red-500 text-center text-xl">No categories found.</p>
+    <% } %>
 </body>
 </html>

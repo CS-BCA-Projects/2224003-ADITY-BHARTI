@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     Study:{
         type:String,
         required:true,
-        enum:["arts", "science", "social sciences", "business", "education", "medicine", "engineering", "other"]
+        enum:["arts", "science", "social", "business", "education", "medicine", "engineering", "other"]
     }
 });
 

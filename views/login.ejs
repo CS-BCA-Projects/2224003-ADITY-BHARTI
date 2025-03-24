@@ -13,10 +13,9 @@
         }
 
         body {
-            background:rgb(255 241 196);
+            background: rgb(255 241 196);
             display: flex;
             height: 100vh;
-            border-top-left-radius: #030100;
         }
 
         /* Sidebar */
@@ -37,7 +36,7 @@
             cursor: pointer;
         }
 
-        /* Main content */
+        /* Main Content */
         .container {
             display: flex;
             flex: 1;
@@ -75,59 +74,28 @@
             width: 80%;
         }
 
-        /* Signup Form */
-        .signup {
+        /* Login Form */
+        .login {
             flex: 1;
             background: rgb(255 241 196);
             padding: 30px;
             border-radius: 10px;
             border: 1px solid #0b0601;
-        }
-
-        .signup h2 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .signup p {
-            font-size: 12px;
-            color: #777;
-            margin-bottom: 20px;
-        }
-
-        .social-buttons {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-
-        .social-btn {
-            background: rgb(255 241 196);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
             text-align: center;
-            cursor: pointer;
-            font-size: 14px;
         }
 
-        .social-btn img {
-            width: 18px;
-            margin-right: 10px;
-        }
-
-        .or {
-            text-align: center;
-            margin: 10px 0;
-            font-size: 12px;
-            color: #999;
+        .login h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
         }
 
         .input-field {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
-            border: 1px solid rgb(255 241 196);
+            border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 14px;
         }
@@ -137,6 +105,8 @@
             font-size: 12px;
             color: #FF5733;
             text-decoration: none;
+            margin-top: 5px;
+            display: block;
         }
 
         .continue-btn {
@@ -154,41 +124,67 @@
         .continue-btn:hover {
             background: #E64A19;
         }
+
+        #message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
     </style>
-    
 </head>
 <body>
-    <%- include('./partials/layout') %><!-- Include the navbar partial -->
+
+    <%- include('./partials/layout') %> <!-- Include the navbar partial -->
+
     <main class="flex-1 ml-20 p-8">
-    <!-- Main Content -->
     <div class="container">
+        <!-- Left Image Section -->
         <div class="content">
-            <img src="./public/images/image.png" alt="Illustration">
+            <img src="./images/image.png" alt="Illustration">
             <h2>Immersive Reading Mode</h2>
             <p>A synchronized ebook and audiobook feature where users can listen to the narration while the text is highlighted, offering a seamless reading and listening experience.</p>
         </div>
 
-        <!-- Signup Section -->
-        <div class="signup">
-            <h2>Create an Account</h2>
-            <p>One subscription for Litverse, Recognotes, and Sparks</p>
-
-            <div class="social-buttons">
-                <div class="social-btn"><img src="google-icon.png" alt=""> Continue with Google</div>
-                <div class="social-btn"><img src="facebook-icon.png" alt=""> Continue with Facebook</div>
-                <div class="social-btn"><img src="apple-icon.png" alt=""> Continue with Apple</div>
-            </div>
-
-            <p class="or">or sign up with</p>
-
-            <input type="email" class="input-field" placeholder="Email address">
-            <input type="password" class="input-field" placeholder="Password">
-
-            <a href="#" class="password-recovery">Recovery Password</a>
-
-            <button class="continue-btn">Continue</button>
+        <!-- Right Login Section -->
+        <div class="login">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" id="email" class="input-field" placeholder="Email address" required>
+                <input type="password" id="password" class="input-field" placeholder="Password" required>
+                <a href="#" class="password-recovery">Forgot Password?</a>
+                <button type="submit" class="continue-btn">Login</button>
+            </form>
+            <div id="message"></div>
         </div>
     </div>
-<script src="../login.js"></script>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+            const messageDiv = document.getElementById('message');
+
+            if (response.ok) {
+                messageDiv.textContent = result.message;
+                messageDiv.style.color = 'green';
+                setTimeout(() => {
+                    window.location.href = result.redirecturl; // Redirect on successful login
+                }, 1000);
+            } else {
+                messageDiv.textContent = result.error || 'Login failed!';
+                messageDiv.style.color = 'red';
+            }
+        });
+    </script>
+
 </body>
 </html>

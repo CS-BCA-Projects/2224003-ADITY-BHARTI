@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user'); 
 const { body} = require('express-validator');
 const bcrypt = require('bcrypt');
+const User = require('../models/User');
 
 router.get('/', (req, res) => res.render('signup')); // Renders Signup Page
 
@@ -15,9 +15,8 @@ router.post('/', [
   
   
     const { email, password, Profession, Study } = req.body;
-   
-    
-    try {
+
+     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });

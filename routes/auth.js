@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user.js');
 const bcrypt = require('bcrypt');
+const User = require('../models/User')
 
+router.get("/",async(req,res) => {
+    res.render('login')
+})
 // Login route
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
     const { Email, Password } = req.body;
 
     // Check if email and password exist in the request
@@ -26,7 +29,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid email ' });
         }
 
-        res.status(200).json({ message: 'Login successful' });
+        res.status(200).json({ message: 'Login successful' ,redirectUrl :'/home' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
