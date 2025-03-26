@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
+    username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     Profession : {
         type : String,
@@ -12,7 +13,10 @@ const userSchema = new mongoose.Schema({
     Study:{
         type:String,
         enum:["arts", "science", "social", "business", "education", "medicine", "engineering", "other"]
-    }
+    },
+    following: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    followers: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    books: { type: mongoose.Schema.Types.ObjectId, ref: "Book" }
 });
 
 // Hash password before saving

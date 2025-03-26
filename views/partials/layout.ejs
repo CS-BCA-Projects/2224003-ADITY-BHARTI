@@ -1,9 +1,45 @@
-<script src="https://cdn.tailwindcss.com"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RishiVerse</title>
+
+    <!-- Tailwind CSS & Remix Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-
-
+    <style>
+        .hidden { display: none; }
+        .sidebar {
+            width: 7rem;
+            background-color: #fef3c7;
+            border-right: 1px solid #fde047;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 1.5rem;
+        }
+        .nav-link {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            transition: color 0.3s;
+        }
+        .nav-link:hover { color: #f97316; }
+        .logout-btn {
+            color: #ef4444;
+            cursor: pointer;
+        }
+        .logout-btn:hover { color: #dc2626; }
+    </style>
 <!-- views/partials/navbar.ejs -->
-
+</head>
+<body>
 <aside class="w-28 bg-warm border-r border-orange-100 flex flex-col items-center py-6 fixed h-screen">
     <div class="w-12 h-12 flex items-center justify-center text-primary mb-8">
         <i class="ri-fire-fill ri-2x"></i><br>
@@ -34,10 +70,21 @@
             <i class="ri-user-add-line ri-xl"></i>
             Signup
         </a>
-        <a href="upload" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
-            <i class="ri-apps-2-line ri-xl"></i>
-            Upload
-        </a>
+<!-- Profile & Logout Links (Hidden initially) -->
+           <div id="profile-links" class="hidden flex flex-col gap-6">
+            <a href="profile" id="profile-link" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+                <i class="ri-user-line ri-xl"></i>
+                Profile
+            </a>
+            <a href="/upload" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+                <i class="ri-upload-cloud-line ri-xl"></i>
+                Upload
+            </a>
+            <button id="logout-btn" class="w-12 h-12 flex items-center justify-center text-red-500 hover:text-red-700">
+                <i class="ri-logout-box-line ri-xl"></i>
+                Logout
+            </button>
+       
     </nav>
 </aside>
 <style>
@@ -85,5 +132,28 @@
             }
         }
     }
-</script>
+        async function checkAuth() {
+            try {
+                const res = await fetch("/me"); // Fetch user data
+                const data = await res.json();
 
+                if (data.user) {
+                    document.getElementById("auth-links").classList.add("hidden"); 
+                    document.getElementById("profile-links").classList.remove("hidden");
+                    document.getElementById("profile-link").href = `/profile/${data.user.id}`;
+                }
+            } catch (error) {
+                console.error("Error checking authentication:", error);
+            }
+        }
+
+        document.getElementById("logout-btn").addEventListener("click", async () => {
+            await fetch("/logout", { method: "POST" });
+            window.location.href = "/rishis"; // Redirect to home after logout
+        });
+
+        checkAuth(); 
+    </script>
+
+</body>
+</html>

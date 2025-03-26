@@ -5,7 +5,9 @@ const bookSchema = new mongoose.Schema({
     author: { type: String, required: true },
     genre: { type: mongoose.Schema.Types.ObjectId, ref: "Category", required: true },
     description: { type: String },
-    contentUrl: { type: String } // Link to the book PDF or content
+    contentUrl: { type: String } ,
+    filePath: {type :String},
+    uploadedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
 module.exports = mongoose.model("Book", bookSchema);
