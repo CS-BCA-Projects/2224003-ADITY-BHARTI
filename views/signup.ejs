@@ -115,7 +115,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     }
     console.log("Submitting:", { email, password, Profession, Study});
     try {
-        const response = await fetch('http://localhost:5001/sign', {
+        const response = await fetch('/sign', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, Profession, Study })

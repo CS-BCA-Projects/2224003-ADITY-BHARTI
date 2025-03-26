@@ -4,14 +4,9 @@ const { body} = require('express-validator');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
-router.get('/', (req, res) => res.render('signup')); // Renders Signup Page
+router.get('/', async (req, res) => res.render('signup')); // Renders Signup Page
 
-router.post('/', [
-    body('email').isEmail().withMessage('Please enter a valid email address.'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long.'),
-    body('Profession').notEmpty().withMessage('Profession is required.'),
-    body('Study').notEmpty().withMessage('Field of work/study is required.')
-], async (req, res) => {
+router.post('/',async (req, res) => {
   
   
     const { email, password, Profession, Study } = req.body;
