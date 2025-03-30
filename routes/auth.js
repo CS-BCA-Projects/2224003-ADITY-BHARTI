@@ -3,9 +3,14 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User')
 
-router.get("/",async(req,res) => {
-    res.render('login')
-})
+
+router.get('/', (req, res) => {
+    if (!req.session.user) {
+      res.redirect('/login');
+    } else {
+      res.render('profile', { user: req.session.user });
+    }
+  });
 // Login route
 router.post('/', async (req, res) => {
     const { Email, Password } = req.body;

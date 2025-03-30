@@ -31,17 +31,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 
-
-// ✅ **Routes Setup**
-app.use('/api', require('./routes/auth'));
-app.use('/api', require('./routes/sign'));
-app.use('/api', require('./routes/profileRoutes'));
-app.use('/sign', signRoutes);
-app.use('/login', authRoutes);
-app.use('/category',categoryRoutes);
-app.use('/api', require('./routes/profileRoutes'));
-app.use('/profile', profileRoutes);
-
 app.use(session({
   secret: "your_secret_key",
   resave: false,
@@ -49,6 +38,24 @@ app.use(session({
   cookie: { secure: false } // Set to true in production with HTTPS
 }));
 
+// ✅ **Routes Setup**
+app.use('/api', require('./routes/auth'));
+app.use('/api', require('./routes/sign'));
+app.use('/api', require('./routes/profileRoutes'));
+app.use('/signup', signRoutes);
+app.use('/login', authRoutes);
+app.use('/category',categoryRoutes);
+app.use('/profile', profileRoutes);
+
+
+
+app.get('/profile', (req, res) => {
+  if (!req.session.user) {
+    res.redirect('/login');
+  } else {
+    res.render('profile', { user: req.session.user });
+  }
+});
 app.post("/logout", (req, res) => {
   req.session.destroy(() => {
       res.json({ success: true });
@@ -58,9 +65,9 @@ app.post("/logout", (req, res) => {
 // Get logged-in user info
 app.get("/me", (req, res) => {
   if (req.session.user) {
-      res.json({ user: req.session.user });
+      res.json({ User: req.session.user });
   } else {
-      res.json({ user: null });
+      res.json({ User: null });
   }
 });
 
@@ -76,8 +83,11 @@ app.use((err, req, res, next) => {
 // ✅ **Render Other Pages**
 app.get('/collection', (req, res) => res.render('collection'));
 app.get('/download', (req, res) => res.render('download'));
-app.get('/rishis', (req, res) => res.render('rishis'));
+app.get('/', (req, res) => res.render('rishis'));
+
 
 
 // ✅ **Start Server**
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+
+

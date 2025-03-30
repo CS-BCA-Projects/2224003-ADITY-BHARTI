@@ -1,40 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const { body} = require('express-validator');
+const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
-const User = require('../models/User');
 
-router.get('/', async (req, res) => res.render('signup')); // Renders Signup Page
+router.get('/', (req, res) => res.render('signup')); // Render Signup Page
 
-router.post('/',async (req, res) => {
-  const { email, password, Profession, Study, username } = req.body;
-  
-     try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
-        }
-        
-        // Hash the password before saving
-        const hashedPassword = await bcrypt.hash(password, 10);
+// Signup Route
+router.post('/', async (req, res) => {
+  console.log("Received Data:", req.body); // Debugging: See what data is coming
 
-        const newUser = await User.create({ email, password: hashedPassword, Profession, Study, username });
-      
-        req.session.user = {
-            id: newUser._id,
-            email: newUser.email,
-            username: newUser.username
-        };
-        
-        res.status(201).json({ 
-            message: 'User registered successfully!',
-            user: { email: newUser.email }
-        });
+  const { email, password, username, profession, study } = req.body;
 
-    } catch (error) {
-        console.error('Error saving user:', error.message);
-        res.status(500).json({ message: 'Server error' });
-    }
+  if (!email || !password || !username || !profession || !study) {
+      return res.status(400).json({ message: 'Please fill out all fields' });
+  }
+
+  try {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+          return res.status(400).json({ message: 'User already exists' });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({ email, password: hashedPassword, username, profession, study });
+
+      await newUser.save();
+      req.session.user = newUser; // ✅ Save user in session
+      console.log("User saved, redirecting to profile...");
+
+      return res.redirect('/profile'); // ✅ Redirect to profile
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Server error' });
+  }
 });
 
-module.exports = router;
+module.exports = router;  // ✅ Corrected this line

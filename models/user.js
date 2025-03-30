@@ -5,18 +5,16 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    Profession : {
-        type : String,
-        required : true,
-        enum : ["Student","Teacher","Researcher","Writer","Librarian","Other"]
+    profession: {
+        type: String,
+        required: true,
+        enum: ["Student", "Teacher", "Researcher", "Writer", "Librarian", "Other"]
     },
-    Study:{
-        type:String,
-        enum:["arts", "science", "social", "business", "education", "medicine", "engineering", "other"]
-    },
-    following: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    followers: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    books: { type: mongoose.Schema.Types.ObjectId, ref: "Book" }
+    study: {
+        type: String,
+        required: true,
+        enum: ["arts", "science", "social", "business", "education", "medicine", "engineering", "other"]
+    }
 });
 
 // Hash password before saving
@@ -26,5 +24,7 @@ userSchema.pre('save', async function(next) {
     next();
 });
 
-const User = mongoose.model('User', userSchema);
+// Prevent model overwrite error
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+
 module.exports = User;

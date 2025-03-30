@@ -1,8 +1,15 @@
 const express = require("express");
 const multer = require("multer");
-const User = require("../models/User");
+const User = require('../models/User'); 
 const Book = require("../models/Book");
 const router = express.Router();
+
+router.get("/", (req, res) => {
+    if (!req.session.user) {
+        return res.redirect("/login"); // Redirect if user not logged in
+    }
+    res.render("profile", { user: req.session.user });
+});
 
 // Multer setup for file uploads
 const storage = multer.diskStorage({
@@ -11,12 +18,6 @@ const storage = multer.diskStorage({
 });
 
 
-router.get("/", (req, res) => {
-    if (!req.session.user) {
-        return res.redirect("/login"); // Redirect if user not logged in
-    }
-    res.render("profile", { user: req.session.user });
-});
 
 
 const upload = multer({ storage });
@@ -63,14 +64,24 @@ router.post("/upload-book", upload.single("book"), async (req, res) => {
         });
         await newBook.save();
 
-        const user = await User.findById(req.user.id);
-        user.books.push(newBook._id);
-        await user.save();
+        const User = await User.findById(req.user.id);
+        User.books.push(newBook._id);
+        await User.save();
 
         res.json({ message: "Book uploaded successfully" });
     } catch (error) {
         res.status(500).json({ error: "Upload failed" });
     }
+    router.get('/profile', (req, res) => {
+        console.log("Session User:", req.session.user); // Debugging
+    
+        if (!req.session.user) {
+            return res.redirect('/signup'); // Redirect only if user is not logged in
+        }
+    
+        res.render('profile', { user: req.session.user });
+    });
+    
 });
 
 module.exports = router;
