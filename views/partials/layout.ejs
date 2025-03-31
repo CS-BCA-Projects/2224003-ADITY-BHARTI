@@ -54,37 +54,30 @@
             <i class="ri-apps-2-line ri-xl"></i>
             Category
         </a>
-        <a href="collection" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
-            <i class="ri-book-open-line ri-xl"></i>
-            Collection
-        </a>
         <a href="download" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
             <i class="ri-download-line ri-xl"></i>
             Download
         </a>
-        <a href="login" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+      <div id="authLinks">
+        <a href="login" id="loginLink" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
             <i class="ri-login-line ri-xl"></i>
             Login
         </a>
-        <a href="signup" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+        <a href="signup" id="signupLink" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
             <i class="ri-user-add-line ri-xl"></i>
             Signup
         </a>
+      </div>
 <!-- Profile & Logout Links (Hidden initially) -->
            <div id="profile-links" class="hidden flex flex-col gap-6">
             <a href="profile" id="profile-link" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
                 <i class="ri-user-line ri-xl"></i>
                 Profile
             </a>
-            <a href="/upload" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
+            <a href="upload" class="w-12 h-12 flex items-center justify-center text-gray-700 hover:text-primary">
                 <i class="ri-upload-cloud-line ri-xl"></i>
                 Upload
             </a>
-            <button id="logout-btn" class="w-12 h-12 flex items-center justify-center text-red-500 hover:text-red-700">
-                <i class="ri-logout-box-line ri-xl"></i>
-                Logout
-            </button>
-       
     </nav>
 </aside>
 <style>
@@ -132,28 +125,37 @@
             }
         }
     }
-        async function checkAuth() {
-            try {
-                const res = await fetch("/me"); // Fetch user data
-                const data = await res.json();
+     </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const user = JSON.parse(localStorage.getItem("userData")); // Check if user is logged in
+        const authLinks = document.getElementById("authLinks");
 
-                if (data.user) {
-                    document.getElementById("auth-links").classList.add("hidden"); 
-                    document.getElementById("profile-links").classList.remove("hidden");
-                    document.getElementById("profile-link").href = `/profile/${data.user.id}`;
-                }
-            } catch (error) {
-                console.error("Error checking authentication:", error);
-            }
+        if (user) {
+            // If user is logged in, show profile & logout
+            authLinks.innerHTML = `
+                <div class="flex flex-col items-center space-y-4">
+    <!-- Profile Icon -->
+    <a href="/profile" class="flex flex-col items-center">
+        <img id="profileIcon" src="./images/account-grey-icon.png" class="w-12 h-12 rounded-full border-2 border-gray-300">profile
+    </a>
+
+    <!-- Logout Icon -->
+    <button id="logoutBtn" class="flex flex-col items-center text-black-500 hover:text-orange-500">
+        <i class="ri-logout-box-r-line text-2xl"></i>
+        <span class="text-sm">Logout</span>
+    </button>
+</div>
+`;
+
+            // Logout functionality
+            document.getElementById("logoutBtn").addEventListener("click", function () {
+                localStorage.removeItem("userData"); // Clear session
+                location.reload(); // Refresh page to show login/signup
+            });
         }
-
-        document.getElementById("logout-btn").addEventListener("click", async () => {
-            await fetch("/logout", { method: "POST" });
-            window.location.href = "/rishis"; // Redirect to home after logout
-        });
-
-        checkAuth(); 
-    </script>
+    });
+</script>
 
 </body>
 </html>

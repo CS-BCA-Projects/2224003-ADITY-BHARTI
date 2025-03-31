@@ -60,7 +60,7 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
-                <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600">Sign Up</button>
+                <button type="submit" class="w-full bg-orange-500 text-white py-3 rounded hover:bg-blue-600">Sign Up</button>
             </form>
         </div>
     </main>
@@ -86,8 +86,13 @@ formData.forEach((value, key) => {
 
                 const result = await response.json();
                 if (response.ok) {
+                    localStorage.setItem("userData", JSON.stringify({
+                username: data.username,
+                profession: data.profession,
+                study: data.study
+            }));
                     alert(result.message);
-                    window.location.href = '/profile';
+                    window.location.href = '/';
                 } else {
                     alert(result.message || 'Signup failed!');
                 }

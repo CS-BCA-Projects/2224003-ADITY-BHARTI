@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const path = require('path');
+const Category = require('./models/Category');
+const Book = require('./models/Book');
 const User = require('./models/User');
 const categoryRoutes = require('./routes/category');
 const authRoutes = require('./routes/auth'); 
@@ -49,7 +51,7 @@ app.get('/profile', (req, res) => {
   if (!req.session.user) {
     res.redirect('/login');
   } else {
-    res.render('profile', { user: req.session.user });
+    res.render('/login', { user: req.session.user });
   }
 });
 app.post("/logout", (req, res) => {
@@ -77,9 +79,9 @@ app.use((err, req, res, next) => {
 
 
 // ✅ **Render Other Pages**
-app.get('/collection', (req, res) => res.render('collection'));
+
 app.get('/download', (req, res) => res.render('download'));
-app.get('/', (req, res) => res.render('rishis'));
+app.get('/rishis', (req, res) => res.render('rishis'));
 
 
 

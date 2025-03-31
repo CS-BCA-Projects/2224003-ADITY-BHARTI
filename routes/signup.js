@@ -28,7 +28,8 @@ router.post('/', async (req, res) => {
       req.session.user = newUser; // ✅ Save user in session
       console.log("User saved, redirecting to profile...");
 
-      res.json({ message: "Signup successful!", redirectUrl: "/profile" });
+      res.json({ message: "Signup successful!" });
+      
   } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Server error' });
