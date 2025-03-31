@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User.js');
+const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => res.render('signup')); // Render Signup Page
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
       req.session.user = newUser; // ✅ Save user in session
       console.log("User saved, redirecting to profile...");
 
-      return res.redirect('/profile'); // ✅ Redirect to profile
+      res.json({ message: "Signup successful!", redirectUrl: "/profile" });
   } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Server error' });

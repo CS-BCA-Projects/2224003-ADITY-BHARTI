@@ -2,28 +2,26 @@ const express = require('express');
 const app = express();
 const session = require("express-session");
 const dotenv = require('dotenv');
-const multer = require("multer");
-dotenv.config({ path: './.env' });
 const mongoose = require('mongoose');
 const cors = require("cors");
 const path = require('path');
-const User = require('./models/User'); // Ensure the path is correct
-const Book = require('./models/Book');
-const Category = require('./models/Category');
+const User = require('./models/User');
 const categoryRoutes = require('./routes/category');
 const authRoutes = require('./routes/auth'); 
-const signRoutes = require('./routes/sign'); 
-const profileRoutes = require('./routes/profileRoutes'); // Adjust the path as needed
+const signRoutes = require('./routes/signup'); 
+const profileRoutes = require('./routes/profileRoutes');
+
+dotenv.config({ path: './.env' });
 
 const PORT = process.env.PORT || 5001;
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://adity07:mongoose123@cluster0.nt08p.mongodb.net/RishiVerse";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://adity07:mongoose123@cluster0.nt08p.mongodb.net/RishiVerse?retryWrites=true&w=majority";
 
-// ✅ **Connect to MongoDB - Only Once**
-mongoose.connect(`${MONGODB_URI}/RishiVerse`, {
-}).then(() => console.log("✅ MongoDB Connected"))
+// Connect to MongoDB
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
   .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
-// ✅ **Middleware**
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -35,19 +33,17 @@ app.use(session({
   secret: "your_secret_key",
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Set to true in production with HTTPS
+  cookie: { secure: false }
 }));
 
-// ✅ **Routes Setup**
+// Routes Setup
 app.use('/api', require('./routes/auth'));
-app.use('/api', require('./routes/sign'));
+app.use('/api', require('./routes/signup'));
 app.use('/api', require('./routes/profileRoutes'));
 app.use('/signup', signRoutes);
 app.use('/login', authRoutes);
-app.use('/category',categoryRoutes);
+app.use('/category', categoryRoutes);
 app.use('/profile', profileRoutes);
-
-
 
 app.get('/profile', (req, res) => {
   if (!req.session.user) {
