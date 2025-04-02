@@ -18,17 +18,15 @@ router.post('/', async (req, res) => {
   try {
       const existingUser = await User.findOne({ email });
       if (existingUser) {
-          return res.status(400).json({ message: 'User already exists' });
+          return res.status(400).json({ message: 'User already exists',redirectUrl :'/login' });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User({ email, password: hashedPassword, username, profession, study });
 
       await newUser.save();
-      req.session.user = newUser; // ✅ Save user in session
-      console.log("User saved, redirecting to profile...");
-
-      res.json({ message: "Signup successful!" });
+      req.session.user = newUser; 
+      res.json({ message: "Signup successful!" , redirectUrl :'/rishis' });
       
   } catch (error) {
       console.error(error);

@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: rgb(255, 241, 196);
+            background-color: rgb(251, 248, 241);
             font-family: Arial, sans-serif;
         }
     </style>
@@ -20,7 +20,7 @@
     <% if (categories.length > 0) { %>
         <% categories.forEach(category => { %>
             <div class="mb-10">
-                <h2 class="text-2xl font-semibold mb-4 bg-yellow-400 p-3 rounded-md text-center shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4 bg-red-800 p-3 rounded-md text-center shadow-lg">
                     <%= category.name %> 📚
                 </h2>
 
@@ -33,7 +33,7 @@
 
                             <div class="mt-4 flex justify-between items-center">
                                 <a href="/book/<%= book._id %>" class="text-black-500 hover:underline">Read More</a>
-                                <a href="<%= book.contentUrl %>" target="_blank" class="bg-orange-500 text-white px-3 py-1 rounded-md hover:bg-orange-300">
+                                <a href="<%= book.contentUrl %>" target="_blank" class="bg-red-800 text-white px-3 py-1 rounded-md hover:bg-red-300">
                                     📖 Open PDF
                                 </a>
                             </div>

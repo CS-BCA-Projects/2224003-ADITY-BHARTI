@@ -9,7 +9,7 @@ const Category = require('./models/Category');
 const Book = require('./models/Book');
 const User = require('./models/User');
 const categoryRoutes = require('./routes/category');
-const authRoutes = require('./routes/auth'); 
+const authRoutes = require('./routes/login'); 
 const signRoutes = require('./routes/signup'); 
 const profileRoutes = require('./routes/profileRoutes');
 
@@ -39,13 +39,15 @@ app.use(session({
 }));
 
 // Routes Setup
-app.use('/api', require('./routes/auth'));
+app.use('/api', require('./routes/login'));
 app.use('/api', require('./routes/signup'));
 app.use('/api', require('./routes/profileRoutes'));
 app.use('/signup', signRoutes);
 app.use('/login', authRoutes);
 app.use('/category', categoryRoutes);
 app.use('/profile', profileRoutes);
+const templeRoutes = require('./routes/temples'); 
+app.use('/temples', templeRoutes);
 
 app.get('/profile', (req, res) => {
   if (!req.session.user) {
@@ -82,8 +84,11 @@ app.use((err, req, res, next) => {
 
 app.get('/download', (req, res) => res.render('download'));
 app.get('/rishis', (req, res) => res.render('rishis'));
-
-
+app.get('/agrarian', (req, res) => res.render('agrarian'));
+app.get('/theNorth', (req, res) => res.render('theNorth'));
+app.get('/fort', (req, res) => res.render('fort'));
+app.get('/dance', (req, res) => res.render('dance'));
+app.get('/caves', (req, res) => res.render('caves'));
 
 // ✅ **Start Server**
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

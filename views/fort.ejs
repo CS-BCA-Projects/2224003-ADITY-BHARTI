@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Forts of India</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #801a1a;
+            text-align: center;
+        }
+        .slider {
+            position: relative;
+            max-width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 3px solid #7c1616;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .slider img.active {
+            opacity: 1;
+        }
+        .fort {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #711a19;
+            color: white;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Famous Forts of India</h1>
+        
+        <div class="slider">
+            <img src="/images/fort-1.jpg" class="active" alt="Red Fort">
+            <img src="/images/fort-2.webp" alt="Amber Fort">
+            <img src="/images/fort-3.webp" alt="Gwalior Fort">
+            <img src="/images/fort-4.webp" alt="Mehrangarh Fort">
+            <img src="/images/fort-5.webp" alt="Agra Fort">
+            <img src="/images/fort-6.webp" alt="Chittorgarh Fort">
+            <img src="/images/fort-8.webp" alt="Jaisalmer Fort">
+        </div>
+        
+        <script>
+            let currentIndex = 0;
+            const images = document.querySelectorAll(".slider img");
+            function showNextImage() {
+                images[currentIndex].classList.remove("active");
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add("active");
+            }
+            setInterval(showNextImage, 2000);
+        </script>
+        
+        <div class="fort">
+            <h2>Red Fort</h2>
+            <p>Built by the Mughal Emperor Shah Jahan in 1648, the Red Fort in Delhi stands as a symbol of India's rich history and independence. Constructed using red sandstone, it served as the primary residence of Mughal emperors for nearly 200 years. The fort features magnificent architecture with Persian, Timurid, and Indian influences. The Lahori Gate, the main entrance, is where the Prime Minister hoists the national flag on Independence Day. Inside, structures like the Diwan-i-Aam, Diwan-i-Khas, and the Rang Mahal highlight Mughal grandeur. The fort also housed the famous Peacock Throne before it was taken away by Persian invader Nadir Shah. Today, it is a UNESCO World Heritage site and a major tourist attraction.</p>
+        </div>
+        
+        <div class="fort">
+            <h2>Amber Fort</h2>
+            <p>Located in Jaipur, Rajasthan, Amber Fort is an architectural marvel built in 1592 by Raja Man Singh I. The fort is a fine example of Rajput and Mughal architecture, with intricate carvings and stunning palaces. The Sheesh Mahal (Mirror Palace) is a major attraction, famous for its dazzling mirror work. The fort was a strategic stronghold and served as the residence of Rajput rulers. The fort's location on a hill provides breathtaking views of Maota Lake. Visitors can reach the fort by foot, jeep, or even on an elephant ride, which adds to the royal experience. Amber Fort is recognized as a UNESCO World Heritage site and is one of Jaipur's most visited landmarks.</p>
+        </div>
+        
+        <div class="fort">
+            <h2>Gwalior Fort</h2>
+            <p>Gwalior Fort, located in Madhya Pradesh, is known for its imposing structure and historical significance. It is believed to have been built in the 8th century by Suraj Sen, a local ruler. The fort is famous for its blue-tiled walls, intricate carvings, and grand temples. It has witnessed several battles and was ruled by different dynasties, including the Rajputs, Mughals, Marathas, and British. The fort houses significant structures like the Man Singh Palace, Gujari Mahal, and Teli Ka Mandir. The fort played a crucial role during India's first war of independence in 1857. Today, it stands as a major attraction, offering panoramic views of Gwalior city.</p>
+        </div>
+        
+        <div class="fort">
+            <h2>Mehrangarh Fort</h2>
+            <p>Mehrangarh Fort in Jodhpur, Rajasthan, is one of the largest and most well-preserved forts in India. Built in 1459 by Rao Jodha, the founder of Jodhpur, it is situated on a rocky hill, offering spectacular views of the blue city below. The fort features massive walls, beautiful palaces, and a museum showcasing artifacts from Rajasthan's royal history. The Sheesh Mahal, Moti Mahal, and Phool Mahal are some of its most exquisite palaces. The fort has witnessed many battles and still bears cannon marks on its walls. Tourists can explore the fort, enjoy folk performances, and experience the thrill of zip-lining around its ramparts.</p>
+        </div>
+        
+        <div class="fort">
+            <h2>Golconda Fort</h2>
+           <p>Built by the Kakatiya dynasty in the 12th century and later expanded by the Qutb Shahi rulers, Golconda Fort is famous for its acoustics, engineering, and diamond trade. The fort was once home to the Koh-i-Noor and Hope diamonds. Its clap echo system at the entrance was used for security purposes. The massive walls, secret tunnels, and majestic gates make it an architectural marvel. It was captured by Aurangzeb in 1687, marking the fall of the Qutb Shahi dynasty.
+</p> 
+        </div>
+        <div class="fort">
+            <h2>Amer Fort</h2>
+            <p>Built by Raja Man Singh I in 1592, Amer Fort is known for its blend of Rajput and Mughal architecture. The fort is constructed from red sandstone and marble and houses the stunning Sheesh Mahal (Mirror Palace), Diwan-i-Aam, and Sukh Niwas. The Ganesh Pol and Suraj Pol are famous gateways. The fort overlooks the Maota Lake, adding to its beauty. The fort was a crucial seat of power before Jaipur became the capital..</p>
+        </div>
+        <div class="fort">
+            <h2> Jaisalmer Fort</h2>
+           <p> Constructed in 1156 by Rao Jaisal, Jaisalmer Fort is one of the few living forts where people still reside. It is known as the Sonar Quila (Golden Fort) due to its yellow sandstone structure that glows in the sun. The fort has massive ramparts, palaces, Jain temples, and merchant houses. It played an important role in the medieval Silk Route trade. The fort has been a battleground during various Rajput-Mughal conflicts and later the British rule.</p>        </div>
+
+           <div class="fort">
+            <h2>Kangra Fort</h2>
+            <p>One of the oldest forts in India, the Kangra Fort was built by the Katoch dynasty and dates back to the 4th century BCE. It was attacked by Mahmud of Ghazni in 1009 AD, the Mughals, and the British. The fort has massive stone walls, hidden passages, and temples. The view of the Beas River from the fort is breathtaking. It survived a major earthquake in 1905 but remains a crucial historical site.reserved forts in India. Built in 1459 by Rao Jodha, the founder of Jodhpur, it is situated on a rocky hill, offering spectacular views of the blue city below. The fort features massive walls, beautiful palaces, and a museum showcasing artifacts from Rajasthan's royal history. The Sheesh Mahal, Moti Mahal, and Phool Mahal are some of its most exquisite palaces. The fort has witnessed many battles and still bears cannon marks on its walls. Tourists can explore the fort, enjoy folk performances, and experience the thrill of zip-lining around its ramparts.</p>
+        </div>
+        
+        <div class="footer">
+            <p>Explore India's majestic forts and relive the stories of bravery, grandeur, and history.</p>
+        </div>
+    </div>
+</body>
+</html>

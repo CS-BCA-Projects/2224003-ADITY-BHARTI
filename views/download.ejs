@@ -9,11 +9,11 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 50px;
-            background-color:rgb(255 241 196);
+            background-color:rgb(254, 252, 245);
            
         }
         .container {
-            background:rgb(255 241 196);
+            background:rgb(108, 38, 23);
             padding: 20px;
             max-width: 400px;
             margin: auto;
@@ -23,7 +23,7 @@
 
         }
         img {
-            background-color:rgb(255 241 196);
+            background-color:rgb(247, 245, 239);
             width: 60%;
             border-radius: 10px;
             
@@ -39,29 +39,30 @@
             display: inline-block;
             padding: 10px 20px;
             margin-top: 20px;
-            background-color: #eb8b3d;
-            color: rgb(255 241 196);
+            background-color: #893320;
+            color: rgb(248, 242, 222);
             text-decoration: none;
             border-radius: 10px;
             border: width 80px;
             font-size: 18px;
         }
         .download-btn:hover {
-            background-color: rgb(255 241 196)2;
+            background-color: rgb(179, 65, 40);
         }
     </style>
      
 <body>
     <%- include('./partials/layout') %> 
+    
     <main class="flex-1 ml-20 p-8">
     <div class="container">
-        <img src="./images/download.png"  class="w-40 h-auto  ">
+        <img src="./images/download.png" class="w-40 h-auto">
 
         <h1>Looks like you have not downloaded anything</h1>
         <h1>Download Your Free eBook</h1>
         <p>Discover insights and strategies in this exclusive eBook. Click the button below to download.</p>
         <button type="submit"
-                        class="w-full bg-primary text-white py-3 rounded hover:bg-primary/90">
+                        class="download-btn bg-rgb(179, 65, 40) text-white py-3 rounded hover:bg-rgb(179, 65, 40)">
                         <a href="./category">Download Now</a>
                     </button>
     </div>

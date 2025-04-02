@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Rishiverse</title>
     <style>
         * {
             margin: 0;
@@ -13,82 +13,69 @@
         }
 
         body {
-            background: rgb(255 241 196);
-            display: flex;
-            height: 100vh;
+            background: rgb(255, 253, 247);
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 80px;
-            background: rgb(255 241 196);
-            padding: 15px;
+        /* Navbar */
+        .navbar {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            gap: 20px;
-            border-right: 1px solid #030100;
+            padding: 15px 50px;
+            background: rgb(120, 15, 15);
+            color: white;
         }
 
-        .sidebar img {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
         }
 
-        /* Main Content */
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container */
         .container {
             display: flex;
-            flex: 1;
-            padding: 30px;
-            gap: 20px;
-        }
-
-        .content {
-            flex: 2;
-            background: rgb(255 241 196);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #0a0500;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            text-align: center;
+            align-items: center;
+            height: 85vh;
+            gap: 50px;
         }
 
+        /* Left Image Section */
         .content img {
-            width: 80%;
-            max-width: 400px;
+            width: 100%;
+            max-width: 450px;
             border-radius: 10px;
         }
 
         .content h2 {
             font-size: 24px;
-            margin: 15px 0;
+            margin-top: 10px;
         }
 
         .content p {
             font-size: 14px;
             color: #191717;
-            width: 80%;
         }
 
         /* Login Form */
         .login {
-            flex: 1;
-            background: rgb(255 241 196);
+            background: white;
             padding: 30px;
             border-radius: 10px;
-            border: 1px solid #0b0601;
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 350px;
         }
 
         .login h2 {
             font-size: 22px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .input-field {
@@ -132,10 +119,17 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <h1>RISHIVERSE</h1>
+        <div>
+            <a href="/rishis">Home</a>
+            <a href="/category">Category</a>
+            <a href="/download">Download</a>
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+        </div>
+    </div>
 
-    <%- include('./partials/layout') %> <!-- Include the navbar partial -->
-
-    <main class="flex-1 ml-20 p-8">
     <div class="container">
         <!-- Left Image Section -->
         <div class="content">
@@ -177,7 +171,7 @@
                 messageDiv.textContent = result.message;
                 messageDiv.style.color = 'green';
                 setTimeout(() => {
-                    window.location.href = '/'; // Redirect on successful login
+                    window.location.href = '/rishis'; // Redirect on successful login
                 }, 1000);
             } else {
                 messageDiv.textContent = result.error || 'Login failed!';
@@ -185,6 +179,5 @@
             }
         });
     </script>
-
 </body>
 </html>
