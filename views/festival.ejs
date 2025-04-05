@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festivals of India</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .festival-section { margin: 50px 0; }
+        .slider { position: relative; max-width: 600px; margin: auto; }
+        .slides img { width: 100%; display: none; }
+        .active { display: block; }
+        .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; }
+        .prev { left: 0; }
+        .next { right: 0; }
+        .festival-details { max-width: 800px; margin: auto; text-align: justify; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Festivals of India</h1>
+    
+    <div class="festival-section">
+        <h2>Diwali</h2>
+        <div class="slider" id="diwali-slider">
+            <img class="slides diwali active" src="/images/diwali.jpg" alt="Diwali 1">        </div>
+        <div class="festival-details">
+            <p>Diwali, the Festival of Lights, is one of India's most important festivals. It symbolizes the victory of light over darkness and good over evil. People decorate their homes with diyas, rangoli, and lights. Fireworks light up the sky, and sweets like laddoos and barfis are shared. Families worship Goddess Lakshmi for prosperity. The festival lasts for five days, starting with Dhanteras and ending with Bhai Dooj. Exchanging gifts and wearing new clothes is a tradition. Business communities open new account books on this auspicious day. People clean their homes to welcome good luck. Diwali is celebrated across India with great enthusiasm.</p>
+        </div>
+    </div>
+    
+    <div class="festival-section">
+        <h2>Holi</h2>
+        <div class="slider" id="holi-slider">
+            <button class="prev" onclick="changeSlide('holi', -1)">&#10094;</button>
+            <img class="slides holi active" src="holi1.jpg" alt="Holi 1">
+            <img class="slides holi" src="holi2.jpg" alt="Holi 2">
+            <img class="slides holi" src="holi3.jpg" alt="Holi 3">
+            <button class="next" onclick="changeSlide('holi', 1)">&#10095;</button>
+        </div>
+        <div class="festival-details">
+            <p>Holi, the festival of colors, is one of India's most joyful celebrations. It marks the arrival of spring and the victory of good over evil. The festival begins with Holika Dahan, a bonfire symbolizing the burning of negativity. The next day, people smear colors on each other and enjoy traditional sweets like gujiya. Water balloons and pichkaris add to the fun. Holi is celebrated with music, dance, and festive gatherings. It fosters unity as people forget past grievances and embrace harmony. The festival is especially famous in Mathura and Vrindavan. Traditional folk songs and bhang add to the excitement. Holi brings people together in a vibrant and colorful celebration.</p>
+        </div>
+    </div>
+    <div class="festival-section">
+        <h2>National Festival - Republic Day</h2>
+        <div class="slider" id="republic-slider">
+            <button class="prev" onclick="changeSlide('republic', -1)">&#10094;</button>
+            <img class="slides republic active" src="republic1.jpg" alt="Republic Day 1">
+            <img class="slides republic" src="republic2.jpg" alt="Republic Day 2">
+            <img class="slides republic" src="republic3.jpg" alt="Republic Day 3">
+            <button class="next" onclick="changeSlide('republic', 1)">&#10095;</button>
+        </div>
+        <div class="festival-details">
+            <p>Republic Day is celebrated on January 26th to mark the adoption of India's Constitution. The grand parade at Rajpath, New Delhi, showcases India's military strength and cultural heritage. The President hoists the national flag and awards gallantry medals. Schools and offices organize patriotic events. The Beating Retreat Ceremony on January 29th marks the end of the celebrations. Republic Day fosters national pride and unity. The day is a reminder of India's democratic values. People watch the celebrations on television across the country. Patriotic songs and speeches inspire citizens. The festival honors India's journey to becoming a republic.</p>
+        </div>
+    </div>
+    
+    <div class="festival-section">
+        <h2>Seasonal Festival - Makar Sankranti</h2>
+        <div class="slider" id="sankranti-slider">
+            <button class="prev" onclick="changeSlide('sankranti', -1)">&#10094;</button>
+            <img class="slides sankranti active" src="sankranti1.jpg" alt="Makar Sankranti 1">
+            <img class="slides sankranti" src="sankranti2.jpg" alt="Makar Sankranti 2">
+            <img class="slides sankranti" src="sankranti3.jpg" alt="Makar Sankranti 3">
+            <button class="next" onclick="changeSlide('sankranti', 1)">&#10095;</button>
+        </div>
+        <div class="festival-details">
+            <p>Makar Sankranti marks the transition of the Sun into Capricorn, symbolizing longer days and the harvest season. It is celebrated across India with regional variations like Pongal in Tamil Nadu and Lohri in Punjab. Kite flying is a major attraction in Gujarat. People prepare sweets made of sesame seeds and jaggery. Devotees take holy dips in rivers like the Ganga and Yamuna. Cattle are adorned and worshipped in rural areas. The festival signifies gratitude towards nature. It is a time for family reunions and feasts. Pilgrimages like the Kumbh Mela often coincide with Makar Sankranti. The festival spreads warmth, positivity, and togetherness.</p>
+        </div>
+    </div>
+    
+    <div class="festival-section">
+        <h2>Religious Festival - Eid-ul-Fitr</h2>
+        <div class="slider" id="eid-slider">
+            <button class="prev" onclick="changeSlide('eid', -1)">&#10094;</button>
+            <img class="slides eid active" src="eid1.jpg" alt="Eid 1">
+            <img class="slides eid" src="eid2.jpg" alt="Eid 2">
+            <img class="slides eid" src="eid3.jpg" alt="Eid 3">
+            <button class="next" onclick="changeSlide('eid', 1)">&#10095;</button>
+        </div>
+        <div class="festival-details">
+            <p>Eid-ul-Fitr marks the end of Ramadan, the Islamic holy month of fasting. Muslims offer special prayers at mosques and give charity to the poor. The day begins with a communal prayer called Salat-al-Eid. Families prepare delicious sweets like sheer kurma and seviyan. People dress in new clothes and greet each other with 'Eid Mubarak'. The festival emphasizes compassion, gratitude, and generosity. It strengthens community bonds and spreads happiness. Gifts and money (Eidi) are given to children. Markets are filled with festive shopping and decorations. Eid-ul-Fitr is a time of joy and spiritual renewal.</p>
+        </div>
+    </div>
+    <div class="festival-section">
+        <h2>Western India Festivals</h2>
+        <div class="slider" id="western-slider">
+            <button class="prev" onclick="changeSlide('western', -1)">&#10094;</button>
+            <img class="slides western active" src="western1.jpg" alt="Western Festival 1">
+            <img class="slides western" src="western2.jpg" alt="Western Festival 2">
+            <img class="slides western" src="western3.jpg" alt="Western Festival 3">
+            <button class="next" onclick="changeSlide('western', 1)">&#10095;</button>
+        </div>
+        <div class="festival-details">
+            <p>Western India hosts some of the most colorful and grand festivals, reflecting its rich heritage and traditions. Rajasthan’s <b>Gangaur</b> and <b>Teej</b> are celebrated by women to honor Goddess Gauri and the arrival of monsoon. The <b>Pushkar Camel Fair</b> is an internationally famous fair, combining cultural events and livestock trading. Gujarat’s <b>Uttarayan</b> marks Makar Sankranti with massive kite-flying celebrations, while <b>Navratri</b> is known for its energetic Garba and Dandiya dances. The <b>Rann Utsav</b> of Kutch transforms the desert into a vibrant cultural hub. Maharashtra’s <b>Ganesh Chaturthi</b> is a grand festival dedicated to Lord Ganesha, and <b>Gudi Padwa</b> signifies the Marathi New Year. <b>Dahi Handi</b>, inspired by Lord Krishna’s childhood, involves human pyramids breaking clay pots. Goa’s <b>Carnival</b> is a Portuguese-influenced festival filled with street parades, music, and dance. The <b>Feast of St. Francis Xavier</b> is a significant Christian festival in Goa, attracting thousands of pilgrims.</p>
+        </div>
+    </div>
+    <div class="festival-section">
+        <h2>Eastern India Festivals</h2>
+        <div class="slider" id="eastern-slider">
+            <button class="prev" onclick="changeSlide('eastern', -1)">&#10094;</button>
+            <img class="slides eastern active" src="eastern1.jpg" alt="Eastern Festival 1">
+            <img class="slides eastern" src="eastern2.jpg" alt="Eastern Festival 2">
+            <img class="slides eastern" src="eastern3.jpg" alt="Eastern Festival 3">
+            <button class="next" onclick="changeSlide('eastern', 1)">&#10095;</button>
+        </div>
+        <div class="festival-details">
+            <p>Eastern India celebrates vibrant festivals that reflect its cultural diversity. <b>Bihu</b> in Assam is the most famous festival, marking the harvest season with traditional dance and music. Meghalaya’s <b>Shad Suk Mynsiem</b> is a Khasi thanksgiving festival where people offer gratitude through dance. Manipur’s <b>Yaoshang</b> is similar to Holi, celebrated with lively performances and community participation. Mizoram’s <b>Chapchar Kut</b> is a major harvest festival, featuring folk dances and feasts. Nagaland’s <b>Hornbill Festival</b> showcases the rich Naga heritage with tribal performances and crafts. Arunachal Pradesh’s <b>Losar</b> is a Tibetan New Year celebration filled with rituals, feasts, and traditional songs. These festivals highlight the traditions and cultural identity of Eastern India, bringing communities together in joyous celebrations.</p>
+        </div>
+    </div>
+    <div class="festival-section">
+        <h2>South India Festivals</h2>
+        <div class="slider" id="south-slider">
+            <button class="prev" onclick="changeSlide('south', -1)">&#10094;</button>
+            <img class="slides south active" src="south1.jpg" alt="South Festival 1">
+            <img class="slides south" src="south2.jpg" alt="South Festival 2">
+            <img class="slides south" src="south3.jpg" alt="South Festival 3">
+            <button class="next" onclick="changeSlide('south', 1)">&#10095;</button>
+        </div>
+        <div class="festival-details">
+            <p>South India is known for its deeply rooted cultural and religious festivals. Tamil Nadu’s <b>Pongal</b> is a major harvest festival where people thank the Sun God for a bountiful harvest. <b>Thaipusam</b> is a Tamil Hindu festival marked by acts of devotion, including body piercings and processions. Kerala’s <b>Onam</b> is a grand 10-day festival celebrating the legendary King Mahabali, featuring feasts, boat races, and traditional dance. <b>Vishu</b> marks the Malayalam New Year with rituals and fireworks. Karnataka’s <b>Mysore Dasara</b> is a spectacular Dussehra celebration with royal processions and cultural events. <b>Hampi Utsav</b> revives the grandeur of the Vijayanagara Empire with performances and art. Andhra Pradesh and Telangana celebrate <b>Ugadi</b> as their New Year, marking new beginnings with festive meals and prayers. <b>Bonalu</b> is a regional festival dedicated to Goddess Mahakali, featuring traditional dances and offerings. These festivals highlight the rich traditions and diversity of South India.</p>
+        </div>
+    </div>
+    <script>
+        function changeSlide(festival, direction) {
+            let slides = document.querySelectorAll('.' + festival);
+            let activeIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+            slides[activeIndex].classList.remove('active');
+            let newIndex = (activeIndex + direction + slides.length) % slides.length;
+            slides[newIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>

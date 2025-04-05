@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audiobooks Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #1f2937;
+    }
+
+    .book-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .book-item {
+      width: 180px;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .book-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .book-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .controls {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .controls.active {
+      display: flex;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .controls button {
+      background-color: #1f2937;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .controls button:hover {
+      background-color: #374151;
+    }
+
+    .progress-bar {
+      width: 100%;
+    }
+
+    .progress-bar input[type="range"] {
+      width: 100%;
+      cursor: pointer;
+      accent-color: #1f2937;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <%- include('./partials/layout') %> 
+  <h1>Audiobooks Collection</h1>
+
+  <div class="book-gallery">
+    <!-- Book 1 -->
+    <div class="book-item" onclick="showControls('audio1')">
+      <img src="/images/gurudev.jpeg" alt="Book 1 Cover">
+      <audio id="audio1" src="/audio/amritwani.mp3" ontimeupdate="updateProgress('audio1')"></audio>
+      <div class="controls" id="controls-audio1">
+        <div class="button-group">
+          <button onclick="togglePlayPause(event, 'audio1')">Play</button>
+          <button onclick="restartAudio(event, 'audio1')">Restart</button>
+          <button onclick="skipForward(event, 'audio1')">+10s</button>
+        </div>
+        <div class="progress-bar">
+          <input type="range" id="progress-audio1" value="0" step="1" onchange="seekAudio('audio1')">
+        </div>
+      </div>
+    </div>
+
+    <!-- Book 2 -->
+    <div class="book-item" onclick="showControls('audio2')">
+      <img src="/images/india.jpeg" alt="Book 2 Cover">
+      <audio id="audio2" src="/audio/matha.mp3" ontimeupdate="updateProgress('audio2')"></audio>
+      <div class="controls" id="controls-audio2">
+        <div class="button-group">
+          <button onclick="togglePlayPause(event, 'audio2')">Play</button>
+          <button onclick="restartAudio(event, 'audio2')">Restart</button>
+          <button onclick="skipForward(event, 'audio2')">+10s</button>
+        </div>
+        <div class="progress-bar">
+          <input type="range" id="progress-audio2" value="0" step="1" onchange="seekAudio('audio2')">
+        </div>
+      </div>
+    </div>
+
+    <!-- Book 3 -->
+    <div class="book-item" onclick="showControls('audio3')">
+      <img src="/images/swamiji.jpeg" alt="Book 3 Cover">
+      <audio id="audio3" src="/audio/amber.mp3" ontimeupdate="updateProgress('audio3')"></audio>
+      <div class="controls" id="controls-audio3">
+        <div class="button-group">
+          <button onclick="togglePlayPause(event, 'audio3')">Play</button>
+          <button onclick="restartAudio(event, 'audio3')">Restart</button>
+          <button onclick="skipForward(event, 'audio3')">+10s</button>
+        </div>
+        <div class="progress-bar">
+          <input type="range" id="progress-audio3" value="0" step="1" onchange="seekAudio('audio3')">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showControls(id) {
+      // Pause others
+      document.querySelectorAll('audio').forEach(audio => {
+        if (audio.id !== id) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
+
+      // Hide other controls
+      document.querySelectorAll('.controls').forEach(control => {
+        control.classList.remove('active');
+      });
+
+      // Show controls & play
+      const controlBox = document.getElementById('controls-' + id);
+      controlBox.classList.add('active');
+
+      const audio = document.getElementById(id);
+      audio.play();
+
+      // Change button text to pause
+      controlBox.querySelector('button').textContent = 'Pause';
+    }
+
+    function togglePlayPause(event, id) {
+      event.stopPropagation();
+      const audio = document.getElementById(id);
+      const btn = event.target;
+
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = 'Pause';
+      } else {
+        audio.pause();
+        btn.textContent = 'Play';
+      }
+    }
+
+    function restartAudio(event, id) {
+      event.stopPropagation();
+      const audio = document.getElementById(id);
+      audio.currentTime = 0;
+      audio.play();
+      const btn = document.querySelector(`#controls-${id} button`);
+      btn.textContent = 'Pause';
+    }
+
+    function skipForward(event, id) {
+      event.stopPropagation();
+      const audio = document.getElementById(id);
+      audio.currentTime += 10;
+    }
+
+    function updateProgress(id) {
+      const audio = document.getElementById(id);
+      const progress = document.getElementById('progress-' + id);
+      if (!isNaN(audio.duration)) {
+        progress.max = audio.duration;
+        progress.value = audio.currentTime;
+      }
+    }
+
+    function seekAudio(id) {
+      const audio = document.getElementById(id);
+      const progress = document.getElementById('progress-' + id);
+      audio.currentTime = progress.value;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbox</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <% if (user) { %>
+  <script>
+    const socket = io();
+    socket.on('chat message', (msg) => {
+      const msgBox = document.getElementById('messages');
+      const div = document.createElement('div');
+      div.innerHTML = `<strong>${msg.user}</strong>: ${msg.text}`;
+      msgBox.prepend(div);
+    });
+  </script>
+  <% } %>
+</head>
+<body class="p-4">
+  <h1 class="text-xl font-bold mb-4">Chat Room</h1>
+
+  <% if (user) { %>
+    <!-- ✅ Chat Form -->
+    <form action="/message" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="username" value="<%= user.username %>" />
+      <input name="text" placeholder="Message" required />
+      <input type="file" name="image" />
+      <input name="topic" placeholder="Topic (optional)" />
+      <button type="submit">Send</button>
+    </form>
+  <% } else { %>
+    <div class="text-red-600 bg-red-100 p-3 rounded my-4">
+      Please <a href="/login" class="underline font-medium">log in</a> to chat.
+    </div>
+  <% } %>
+
+  <!-- ✅ Messages -->
+  <div id="messages" class="mt-4">
+    <% messages.forEach(msg => { %>
+      <div class="border p-2 my-2 <%= msg.pinned ? 'bg-yellow-100' : '' %>">
+        <strong><%= msg.username %></strong>: <%= msg.text %>
+        <% if (msg.imageUrl) { %>
+          <img src="<%= msg.imageUrl %>" class="w-32 mt-2" />
+        <% } %>
+        <% if (user && !msg.pinned) { %>
+          <form action="/pin/<%= msg._id %>" method="POST">
+            <button class="text-sm text-blue-500">Pin</button>
+          </form>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+
+  <hr class="my-6" />
+
+  <h2 class="text-lg font-semibold mb-2">Create Poll</h2>
+  <% if (user) { %>
+    <form action="/poll" method="POST">
+      <input name="question" placeholder="Poll question" required />
+      <input name="options" placeholder="Comma separated options" required />
+      <button type="submit">Create</button>
+    </form>
+  <% } else { %>
+    <div class="text-yellow-700 bg-yellow-100 p-2 rounded my-2">
+      Log in to create polls.
+    </div>
+  <% } %>
+
+  <% polls.forEach(poll => { %>
+    <div class="mt-4 p-2 border">
+      <strong><%= poll.question %></strong>
+      <ul>
+        <% poll.options.forEach(option => { %>
+          <li><%= option.text %> - <%= option.votes %> votes</li>
+        <% }) %>
+      </ul>
+    </div>
+  <% }) %>
+
+  <hr class="my-6" />
+
+  <h2 class="text-lg font-semibold mb-2">Recommend a Book</h2>
+  <% if (user) { %>
+    <form action="/recommend-book" method="POST">
+      <input name="title" placeholder="Book Title" required />
+      <input name="author" placeholder="Author" required />
+      <textarea name="description" placeholder="Why do you recommend it?"></textarea>
+      <input type="hidden" name="recommendedBy" value="<%= user.username %>" />
+      <button type="submit">Recommend</button>
+    </form>
+  <% } else { %>
+    <div class="text-yellow-700 bg-yellow-100 p-2 rounded my-2">
+      Log in to recommend a book.
+    </div>
+  <% } %>
+
+  <% books.forEach(book => { %>
+    <div class="mt-2 p-2 border">
+      <strong><%= book.title %></strong> by <%= book.author %><br/>
+      <small><%= book.description %></small><br/>
+      <i>Recommended by <%= book.recommendedBy %></i>
+    </div>
+  <% }) %>
+</body>
+</html>
