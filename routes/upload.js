@@ -36,7 +36,7 @@ router.post('/', upload.fields([{ name: 'cover' }, { name: 'file' }]), async (re
       uploadedBy: req.session.user._id
     });
     await newUpload.save();
-    res.redirect('myCollection');
+    res.redirect('/myCollections');
   } catch (err) {
     console.error("🔥 Multer error:", err);
     res.status(500).send("Upload failed.");

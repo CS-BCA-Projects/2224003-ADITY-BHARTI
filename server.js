@@ -14,7 +14,7 @@ const signRoutes = require('./routes/signup');
 const profileRoutes = require('./routes/profileRoutes');
 const templeRoutes = require('./routes/temples');
 const uploadRoute = require('./routes/upload'); // adjust path if needed
-const myCollectionRoute = require('./routes/myCollection');
+const myCollectionRoute = require('./routes/myCollections');
 
 dotenv.config({ path: './.env' });
 
@@ -51,7 +51,7 @@ app.use('/category', categoryRoutes);
 app.use('/profile', profileRoutes);
 app.use('/temples', templeRoutes);
 app.use('/upload', uploadRoute);
-app.use('/myCollection', myCollectionRoute);
+app.use('/myCollections', myCollectionRoute);
 
 app.get('/profile', (req, res) => {
   if (!req.session.user) {

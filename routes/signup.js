@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => res.render('signup')); // Render Signup Page
 
@@ -21,10 +20,8 @@ router.post('/', async (req, res) => {
           return res.status(400).json({ message: 'User already exists',redirectUrl :'/login' });
       }
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = new User({ email, password: hashedPassword, username, profession, study });
+      const newUser = await User.create({ email, password, username, profession, study });
 
-      await newUser.save();
       req.session.user = newUser; 
       res.json({ message: "Signup successful!" , redirectUrl :'/rishis' });
       

@@ -17,16 +17,21 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// Hash password before saving
-userSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
+
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next() // if password was not modified just return it not execute the fun
+
+    this.password = await bcrypt.hash(this.password, 10) //hashing the password
+    console.log("Password hashed successfully", this.password)
+    next()
 });
 
-userSchema.methods.comparePassword = async function(password) {
-    return await bcrypt.compare(password, this.password);
-};
+userSchema.methods.isPasswordCorrect = async function (password) {
+    console.log("Password to check: ", password);
+    console.log("Hashed password: ", this.password);
+    return await bcrypt.compare(password, this.password)
+}
+
 // Prevent model overwrite error
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
