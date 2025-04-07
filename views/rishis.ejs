@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>tailwind.config={theme:{extend:{colors:{primary:'#8B0000',secondary:'#FFD700'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#8B0000', secondary: '#FFD700' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
     <style>
-        :where([class^="ri-"])::before { content: "\f3c2"; }
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
     </style>
     <style>
-         .content {
+        .content {
             width: 90%;
             max-width: 1200px;
             margin: 20px auto;
@@ -23,6 +26,7 @@
             padding: 30px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
         .carousel {
             display: flex;
             transition: transform 0.3s ease-in-out;
@@ -38,277 +42,351 @@
             height: 400px;
             object-fit: cover;
         }
-        </style>
+    </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Header -->
-    <%- include('./partials/layout') %> 
-<!-- Hero Banner -->
-<div class="carousel-container">
-    <div class="carousel" id="carousel">
-        <div class="carousel-item"><img src="/images/flower.png"></div>
-        <div class="carousel-item"><img src="/images/frert.png"></div>
-        <div class="carousel-item"><img src="/images/indian.jpg"></div>
-        <div class="carousel-item"><img src="/images/vhbj.jpeg"></div>
-        <div class="carousel-item"><img src="/images/sitar.png"></div>
-        <div class="carousel-item"><img src="/images/painting.png"></div>
-        <div class="carousel-item"><img src="/images/buddha.png"></div>
-        <div class="carousel-item"><img src="/images/vcbc.jpg"></div>
-</div>
+    <%- include('./partials/layout') %>
+        <!-- Hero Banner -->
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="carousel-item"><img src="/images/flower.png"></div>
+                <div class="carousel-item"><img src="/images/painting.png"></div>
+                <div class="carousel-item"><img src="/images/indian.jpg"></div>
+                <div class="carousel-item"><img src="/images/fort-6.webp"></div>
+                <div class="carousel-item"><img src="/images/sitar.png"></div>
+                <div class="carousel-item"><img src="/images/painting.png"></div>
+                <div class="carousel-item"><img src="/images/buddha.png"></div>
+                <div class="carousel-item"><img src="/images/vcbc.jpg"></div>
+            </div>
 
-    <!-- Categories Section -->
-    <div class="py-8 container mx-auto px-6">
-        <h2 class="text-2xl font-semibold text-center mb-6 relative">
-            <span class="relative z-10">Categories</span>
-            <div class="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-32 h-0.5 bg-primary"></div>
-        </h2>
-            
-            <div class="flex justify-between items-center space-x-6 overflow-x-auto py-4 px-8">
-                <div class="flex flex-col items-center min-w-max">
-                    <div class="w-16 h-16 flex items-center justify-center bg-red-50 rounded-lg border border-red-100 mb-2">
-                        <i class="ri-book-open-line text-2xl text-primary"></i>
-                    </div>
-                    <span class="text-sm text-center">Ancient Scriptures</span>
-                </div>
-                
-                <div class="flex flex-col items-center min-w-max">
-                    <div class="w-16 h-16 flex items-center justify-center bg-yellow-50 rounded-lg border border-yellow-100 mb-2">
-                        <i class="ri-gallery-line text-2xl text-primary"></i>
-                    </div>
-                    <span class="text-sm text-center">Historic Cities of India</span>
-                </div>
-                
-                <div class="flex flex-col items-center min-w-max">
-                    <div class="w-16 h-16 flex items-center justify-center bg-blue-50 rounded-lg border border-blue-100 mb-2">
-                        <i class="ri-archive-line text-2xl text-primary"></i>
-                    </div>
-                    <span class="text-sm text-center">Ayurvedas</span>
-                </div>
-                
-                <div class="flex flex-col items-center min-w-max">
-                    <div class="w-16 h-16 flex items-center justify-center bg-green-50 rounded-lg border border-green-100 mb-2">
-                        <i class="ri-paint-color-line text-2xl text-primary"></i>
-                    </div>
-                    <span class="text-sm text-center">Paintings</span>
-                </div>
-                
-                <div class="flex flex-col items-center min-w-max">
-                    <div class="w-16 h-16 flex items-center justify-center bg-purple-50 rounded-lg border border-purple-100 mb-2">
-                        <i class="ri-meditiation-line-3 text-2xl text-primary"></i>
-                    </div>
-                    <span class="text-sm text-center">Sprituality</span>
-                </div>
-                
-                <div class="flex flex-col items-center min-w-max">
-                    <div class="w-16 h-16 flex items-center justify-center bg-indigo-50 rounded-lg border border-indigo-100 mb-2">
-                        <i class="ri-flask-line-2 text-2xl text-primary"></i>
-                    </div>
-                    <span class="text-sm text-center">Vedic Science</span>
-                </div>
-                
-                <div class="flex flex-col items-center min-w-max">
-                    <div class="w-16 h-16 flex items-center justify-center bg-red-50 rounded-lg border border-red-100 mb-2">
-                        <i class="ri-video-line text-2xl text-primary"></i>
-                        <a href="./category"></a>
-                    </div>
-                    <span class="text-sm text-center">More</span>
-                </div>
-            </div>
-            
-            <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-lg p-2 z-10">
-                <i class="ri-arrow-right-s-line text-xl"></i>
-            </button>
-        </div>
-        
-        <div class="flex justify-center mt-4 space-x-1">
-            <div class="w-2 h-2 rounded-full bg-primary"></div>
-            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
-            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
-            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
-            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
-        </div>
-    </div>
-
-    <!-- New Additions Section -->
-    <div class="py-8 container mx-auto px-6">
-        <h2 class="text-2xl font-semibold text-center mb-6 relative">
-            <span class="relative z-10">New Additions</span>
-            <div class="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-32 h-0.5 bg-primary"></div>
-        </h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="newAdditions">
-            <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <a href="temples" target="_blank">
-                <div class="h-48 overflow-hidden">
-                    <img src="https://public.readdy.ai/ai/img_res/b7097c1b7a928a7489c4a43ff95d7989.jpg" alt="Temples of the Hoysalas" class="w-full h-full object-cover object-top transition-transform hover:scale-105">
-                </div></a>
-                <div class="p-3 bg-primary text-white text-center">
-                    <h3 class="font-medium">Temples of the Hoysalas</h3>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <a href="agrarian" target="_blank">
-                <div class="h-48 overflow-hidden">
-                    <img src="https://public.readdy.ai/ai/img_res/8e5ea9623f23cc683002f0fd5f93ac80.jpg" alt="Agrarian Legacy" class="w-full h-full object-cover object-top transition-transform hover:scale-105">
-                </div></a>
-                <div class="p-3 bg-primary text-white text-center">
-                    <h3 class="font-medium">Agrarian Legacy</h3>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <a href="theNorth" target="_blank">
-                <div class="h-48 overflow-hidden">
-                    <img src="https://public.readdy.ai/ai/img_res/17fe1dc421827452f4b70bde5205e0f0.jpg" alt="The North Brief Archives" class="w-full h-full object-cover object-top transition-transform hover:scale-105">
-                </div>
-                </a>
-                <div class="p-3 bg-primary text-white text-center">
-                    <h3 class="font-medium">The Ancient Books</h3>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-               <a href="fort" target="_blank">
-                <div class="h-48 overflow-hidden">
-                    <img src="https://public.readdy.ai/ai/img_res/5993b412e2e5890d42797bf38bd762f7.jpg" alt="Forts of India" class="w-full h-full object-cover object-top transition-transform hover:scale-105">
-                </div>
-            </a>
-                <div class="p-3 bg-primary text-white text-center">
-                    <h3 class="font-medium">Forts of India</h3>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-               <a href="dance" target="_blank">
-                <div class="h-48 overflow-hidden">
-                    <img src="https://public.readdy.ai/ai/img_res/7161c3d7197bde82df5704f3faf297a1.jpg" alt="Visual Walkthrough" class="w-full h-full object-cover object-top transition-transform hover:scale-105">
-                </div> </a>
-                <div class="p-3 bg-primary text-white text-center">
-                    <h3 class="font-medium">Visual Walkthrough</h3>
-                </div>
-            </div>
-            
-            <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <a href="caves" target="_blank">
-                <div class="h-48 overflow-hidden">
-                    <img src="https://public.readdy.ai/ai/img_res/2ebfa0abed191d8f652500d09dffeebf.jpg" alt="Historic Caves of India" class="w-full h-full object-cover object-top transition-transform hover:scale-105">
-                </div></a>
-                <div class="p-3 bg-primary text-white text-center">
-                    <h3 class="font-medium">Historic Caves of India</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Split Section: Freedom Archive and Did You Know -->
-    <div class="py-8 container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Freedom Archive Section -->
-            <div>
+            <!-- Categories Section -->
+            <div class="py-8 container mx-auto px-6">
                 <h2 class="text-2xl font-semibold text-center mb-6 relative">
-                    <span class="relative z-10">Freedom Archive</span>
+                    <span class="relative z-10">Categories</span>
                     <div class="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-32 h-0.5 bg-primary"></div>
                 </h2>
-                
-                <div class="grid grid-cols-2 gap-4" id="freedomArchive">
-                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                        <img src="https://public.readdy.ai/ai/img_res/33b2609613bf297b5ead1d050df53438.jpg" alt="Freedom Fighter" class="w-full h-full object-cover object-top">
+
+                <div class="flex justify-between items-center space-x-6 overflow-x-auto py-4 px-8">
+                    <div class="flex flex-col items-center min-w-max">
+                        <a href="festival" target="_blank">
+                        <div
+                            class="w-16 h-16 flex items-center justify-center bg-red-50 rounded-lg border border-red-100 mb-2">
+                            <i class="ri-book-open-line text-2xl text-primary"></i>
+                        </div></a>
+                        <span class="text-sm text-center">Festivals of India</span>
                     </div>
-                    
-                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                        <img src="https://public.readdy.ai/ai/img_res/27aca0051a4518384d507814844ee961.jpg" alt="Independence Movement" class="w-full h-full object-cover object-top">
+
+                    <div class="flex flex-col items-center min-w-max">
+                        <a href="historic-cities" target="_blank">
+                        <div
+                            class="w-16 h-16 flex items-center justify-center bg-yellow-50 rounded-lg border border-yellow-100 mb-2">
+                            <i class="ri-gallery-line text-2xl text-primary"></i>
+                        </div></a>
+                        <span class="text-sm text-center">Ayurveda</span>
+                    </div>
+
+                    <div class="flex flex-col items-center min-w-max">
+                        <a href="historic-cities" target="_blank">
+                        <div
+                            class="w-16 h-16 flex items-center justify-center bg-blue-50 rounded-lg border border-blue-100 mb-2">
+                            <i class="ri-archive-line text-2xl text-primary"></i>
+                        </div></a>
+                        <span class="text-sm text-center">Historic Cities of India</span>
+                    </div>
+
+                    <div class="flex flex-col items-center min-w-max">
+                        <a href="painting" target="_blank">
+                        <div
+                            class="w-16 h-16 flex items-center justify-center bg-green-50 rounded-lg border border-green-100 mb-2">
+
+                            <i class="ri-paint-color-line text-2xl text-primary"></i>
+                        </div>
+                        <span class="text-sm text-center">Paintings</span>
+                    </div>
+
+                    <div class="flex flex-col items-center min-w-max">
+                        <div
+                            class="w-16 h-16 flex items-center justify-center bg-purple-50 rounded-lg border border-purple-100 mb-2">
+                            <i class="ri-meditiation-line-3 text-2xl text-primary"></i>
+                        </div>
+                        <span class="text-sm text-center">Sprituality</span>
+                    </div>
+
+                    <div class="flex flex-col items-center min-w-max">
+                        <a href="audioBooks" target="_blank">
+                        <div
+                            class="w-16 h-16 flex items-center justify-center bg-indigo-50 rounded-lg border border-indigo-100 mb-2">
+                            <i class="ri-flask-line-2 text-2xl text-primary"></i>
+                        </div></a>
+                        <span class="text-sm text-center">Audio Books</span>
+                    </div>
+
+                    <div class="flex flex-col items-center min-w-max">
+                        <div
+                            class="w-16 h-16 flex items-center justify-center bg-red-50 rounded-lg border border-red-100 mb-2">
+                            <i class="ri-video-line text-2xl text-primary"></i>
+                            <a href="./category"></a>
+                        </div>
+                        <span class="text-sm text-center">More</span>
+                    </div>
+                </div>
+
+                <button
+                    class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-lg p-2 z-10">
+                    <i class="ri-arrow-right-s-line text-xl"></i>
+                </button>
+            </div>
+
+            <div class="flex justify-center mt-4 space-x-1">
+                <div class="w-2 h-2 rounded-full bg-primary"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+            </div>
+        </div>
+
+        <!-- New Additions Section -->
+        <div class="py-8 container mx-auto px-6">
+            <h2 class="text-2xl font-semibold text-center mb-6 relative">
+                <span class="relative z-10">New Additions</span>
+                <div class="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-32 h-0.5 bg-primary"></div>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="newAdditions">
+                <div
+                    class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="temples" target="_blank">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://public.readdy.ai/ai/img_res/b7097c1b7a928a7489c4a43ff95d7989.jpg"
+                                alt="Temples of the Hoysalas"
+                                class="w-full h-full object-cover object-top transition-transform hover:scale-105">
+                        </div>
+                    </a>
+                    <div class="p-3 bg-primary text-white text-center">
+                        <h3 class="font-medium">Temples of the Hoysalas</h3>
+                    </div>
+                </div>
+
+                <div
+                    class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="agrarian" target="_blank">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://public.readdy.ai/ai/img_res/8e5ea9623f23cc683002f0fd5f93ac80.jpg"
+                                alt="Agrarian Legacy"
+                                class="w-full h-full object-cover object-top transition-transform hover:scale-105">
+                        </div>
+                    </a>
+                    <div class="p-3 bg-primary text-white text-center">
+                        <h3 class="font-medium">Agrarian Legacy</h3>
+                    </div>
+                </div>
+
+                <div
+                    class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="theNorth" target="_blank">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://public.readdy.ai/ai/img_res/17fe1dc421827452f4b70bde5205e0f0.jpg"
+                                alt="The North Brief Archives"
+                                class="w-full h-full object-cover object-top transition-transform hover:scale-105">
+                        </div>
+                    </a>
+                    <div class="p-3 bg-primary text-white text-center">
+                        <h3 class="font-medium">The Ancient Books</h3>
+                    </div>
+                </div>
+
+                <div
+                    class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="fort" target="_blank">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://public.readdy.ai/ai/img_res/5993b412e2e5890d42797bf38bd762f7.jpg"
+                                alt="Forts of India"
+                                class="w-full h-full object-cover object-top transition-transform hover:scale-105">
+                        </div>
+                    </a>
+                    <div class="p-3 bg-primary text-white text-center">
+                        <h3 class="font-medium">Forts of India</h3>
+                    </div>
+                </div>
+
+                <div
+                    class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="dance" target="_blank">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://public.readdy.ai/ai/img_res/7161c3d7197bde82df5704f3faf297a1.jpg"
+                                alt="Visual Walkthrough"
+                                class="w-full h-full object-cover object-top transition-transform hover:scale-105">
+                        </div>
+                    </a>
+                    <div class="p-3 bg-primary text-white text-center">
+                        <h3 class="font-medium">Visual Walkthrough</h3>
+                    </div>
+                </div>
+
+                <div
+                    class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="caves" target="_blank">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://public.readdy.ai/ai/img_res/2ebfa0abed191d8f652500d09dffeebf.jpg"
+                                alt="Historic Caves of India"
+                                class="w-full h-full object-cover object-top transition-transform hover:scale-105">
+                        </div>
+                    </a>
+                    <div class="p-3 bg-primary text-white text-center">
+                        <h3 class="font-medium">Historic Caves of India</h3>
                     </div>
                 </div>
             </div>
-            
-            <!-- Did You Know Section -->
-            <div>
-                <h2 class="text-2xl font-semibold text-center mb-6 relative">
-                    <span class="relative z-10">Did You Know?</span>
-                    <div class="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-32 h-0.5 bg-primary"></div>
-                </h2>
-                
-                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full flex-shrink-0 mr-3">
-                                <i class="ri-lightbulb-line"></i>
-                            </div>
-                            <p class="text-gray-700">India has the world's largest collection of songs, music, dance, theatre, folk traditions, performing arts, rites and rituals, paintings and writings that are known, as the 'Intangible Cultural Heritage' (ICH) of humanity.</p>
+        </div>
+
+        <!-- Split Section: Freedom Archive and Did You Know -->
+        <div class="py-8 container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Freedom Archive Section -->
+                <div>
+                    <h2 class="text-2xl font-semibold text-center mb-6 relative">
+                        <span class="relative z-10">Freedom Archive</span>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-32 h-0.5 bg-primary"></div>
+                    </h2>
+
+                    <div class="grid grid-cols-2 gap-4" id="freedomArchive">
+                        <div
+                            class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <img src="https://public.readdy.ai/ai/img_res/33b2609613bf297b5ead1d050df53438.jpg"
+                                alt="Freedom Fighter" class="w-full h-full object-cover object-top">
                         </div>
-                        
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full flex-shrink-0 mr-3">
-                                <i class="ri-lightbulb-line"></i>
-                            </div>
-                            <p class="text-gray-700">The Kumbh Mela, a mass Hindu pilgrimage of faith, is the largest peaceful gathering in the world where around 100 million people gather to bathe in a sacred river.</p>
+
+                        <div
+                            class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <img src="https://public.readdy.ai/ai/img_res/27aca0051a4518384d507814844ee961.jpg"
+                                alt="Independence Movement" class="w-full h-full object-cover object-top">
                         </div>
-                        
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full flex-shrink-0 mr-3">
-                                <i class="ri-lightbulb-line"></i>
-                            </div>
-                            <p class="text-gray-700">The world's first university was established in Takshashila in 700 BC. More than 10,500 students from all over the world studied more than 60 subjects.</p>
+                    </div>
+                </div>
+
+                <!-- Did You Know Section -->
+                <div id="fact-box">
+                    <h2 class="text-2xl font-semibold text-center mb-6 relative">
+                        <span class="relative z-10">Did You Know?</span>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-32 h-0.5 bg-primary"></div>
+                    </h2>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                        <div class="space-y-4" id="fact-list">
+                            <!-- Facts will be inserted here -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-       <script>
-        let index = 0;
-    function slideCarousel() {
-        const carousel = document.getElementById('carousel');
-        const items = document.querySelectorAll('.carousel-item');
-        items.forEach((item, i) => {
-            item.style.display = i === index ? 'block' : 'none';
-        });
-        index = (index + 1) % items.length;
-    }
-    setInterval(slideCarousel, 5000);
-    slideCarousel();
-</script>
-<script>
-        // Mock data for new additions
-        const newAdditionsData = [
-            { 
-                image: "https://public.readdy.ai/ai/img_res/162e1a68fcc37c794025159985d39fa8.jpg", 
-                title: "Temples of the Hoysalas" 
-            },
-            { 
-                image: "https://public.readdy.ai/ai/img_res/06fe34533b19302f5be2921e926427bc.jpg", 
-                title: "Agrarian Legacy" 
-            },
-            { 
-                image: "https://public.readdy.ai/ai/img_res/2330f4032c72fec0a0f805325f44b1b5.jpg", 
-                title: "The North Brief Archives" 
-            },
-            { 
-                image: "https://public.readdy.ai/ai/img_res/b132e3d545b1134dcd0fd9abcb4930cc.jpg", 
-                title: "Forts of India" 
-            },
-            { 
-                image: "https://public.readdy.ai/ai/img_res/b98e0d30ce2b238f3b1ffcc77aef389e.jpg", 
-                title: "Visual Walkthrough" 
-            },
-            { 
-                image: "https://public.readdy.ai/ai/img_res/8a8249229f635633c8044290d12133be.jpg", 
-                title: "Historic Caves of India" 
+        <script>
+            let index = 0;
+            function slideCarousel() {
+                const carousel = document.getElementById('carousel');
+                const items = document.querySelectorAll('.carousel-item');
+                items.forEach((item, i) => {
+                    item.style.display = i === index ? 'block' : 'none';
+                });
+                index = (index + 1) % items.length;
             }
-        ];
+            setInterval(slideCarousel, 5000);
+            slideCarousel();
+        </script>
+        <script>
+            // Mock data for new additions
+            const newAdditionsData = [
+                {
+                    image: "https://public.readdy.ai/ai/img_res/162e1a68fcc37c794025159985d39fa8.jpg",
+                    title: "Temples of the Hoysalas"
+                },
+                {
+                    image: "https://public.readdy.ai/ai/img_res/06fe34533b19302f5be2921e926427bc.jpg",
+                    title: "Agrarian Legacy"
+                },
+                {
+                    image: "https://public.readdy.ai/ai/img_res/2330f4032c72fec0a0f805325f44b1b5.jpg",
+                    title: "The North Brief Archives"
+                },
+                {
+                    image: "https://public.readdy.ai/ai/img_res/b132e3d545b1134dcd0fd9abcb4930cc.jpg",
+                    title: "Forts of India"
+                },
+                {
+                    image: "https://public.readdy.ai/ai/img_res/b98e0d30ce2b238f3b1ffcc77aef389e.jpg",
+                    title: "Visual Walkthrough"
+                },
+                {
+                    image: "https://public.readdy.ai/ai/img_res/8a8249229f635633c8044290d12133be.jpg",
+                    title: "Historic Caves of India"
+                }
+            ];
 
-        // Mock data for freedom archive
-        const freedomArchiveData = [
-            { 
-                image: "https://public.readdy.ai/ai/img_res/9b4456cc8253969d82aaded283d7a06a.jpg", 
-                title: "Freedom Fighter" 
-            },
-            { 
-                image: "https://public.readdy.ai/ai/img_res/dcf162b68ffd1d070ed0b27585f5b468.jpg", 
-                title: "Independence Movement" 
+            // Mock data for freedom archive
+            const freedomArchiveData = [
+                {
+                    image: "https://public.readdy.ai/ai/img_res/9b4456cc8253969d82aaded283d7a06a.jpg",
+                    title: "Freedom Fighter"
+                },
+                {
+                    image: "https://public.readdy.ai/ai/img_res/dcf162b68ffd1d070ed0b27585f5b468.jpg",
+                    title: "Independence Movement"
+                }
+            ];
+        </script>
+        <script>
+            const facts = [
+                "The Nalanda University library burned for months after being destroyed in the 12th century.",
+                "Ancient Indian texts like the Vedas were preserved through oral tradition for thousands of years.",
+                "The Sarasvati Mahal Library in Tanjore contains thousands of rare palm-leaf manuscripts.",
+                "Palm leaf manuscripts were a primary medium for writing in ancient India.",
+                "The concept of zero was first documented in India around the 5th century CE.",
+                "The Library of Ashurbanipal (7th century BCE) is one of the oldest known libraries.",
+                "The Vikramshila University Library was a major learning center before its destruction in the 12th century.",
+                "The Rigveda, composed around 1500 BCE in India, is one of the oldest known sacred texts in the world.",
+                "Takshashila, an ancient Indian university from 700 BCE, had students from as far as Greece and China.",
+                "Brahmagupta, an Indian mathematician, was the first to define and use zero in the 7th century CE.",
+                "India’s Nalanda University had a library so vast that it burned for months when destroyed in the 12th century.",
+                "The Indian epic Mahabharata is over 100,000 verses long, making it one of the longest literary works ever written.",
+                "Sanskrit, the classical language of India, is considered one of the most precise languages and is still used in Hindu rituals.",
+                "The Library of Alexandria, though located in Egypt, housed Indian scrolls and texts translated into Greek.",
+                "The concept of surgical instruments and operations was described in India’s ancient Sushruta Samhita around 600 BCE.",
+                "The Ajanta Caves, dating back to the 2nd century BCE, are one of the earliest known examples of Indian mural painting and storytelling.",
+                "Ancient Indian scholars had documented knowledge of gravity, planetary motion, and atomic theory long before modern science.",
+                "The world’s first universities were established in India, including Nalanda and Vikramashila, centuries before Oxford or Cambridge.",
+                "The Library of Ashurbanipal in ancient Mesopotamia contained Indian medical and astrological texts on clay tablets.",
+                "In ancient India, libraries were often attached to temples and monasteries and guarded as sacred knowledge centers.",
+                "Indian astronomers like Aryabhata calculated the earth’s circumference with remarkable accuracy in the 5th century.",
+                "Palm leaf manuscripts in ancient Indian libraries were written with styluses and preserved with herbal oils and smoke."
+            ];
+
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+            const factsPerDay = 3;
+            const startIndex = (dayOfYear * factsPerDay) % facts.length;
+
+            const factList = document.getElementById("fact-list");
+            factList.innerHTML = ""; // Clear if needed
+
+            for (let i = 0; i < factsPerDay; i++) {
+                const factText = facts[(startIndex + i) % facts.length];
+
+                const wrapper = document.createElement("div");
+                wrapper.className = "flex items-start";
+
+                wrapper.innerHTML = `
+            <div class="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full flex-shrink-0 mr-3">
+                <i class="ri-lightbulb-line"></i>
+            </div>
+            <p class="text-gray-700">${factText}</p>
+        `;
+
+                factList.appendChild(wrapper);
             }
-        ];
-    </script>
+        </script>
+
 </body>
+
 </html>

@@ -123,8 +123,7 @@
         <h1>RISHIVERSE</h1>
         <div>
             <a href="/rishis">Home</a>
-            <a href="/category">Category</a>
-            <a href="/download">Download</a>
+            <a href="#">Chat Forum</a>
             <a href="/login">Login</a>
             <a href="/signup">Signup</a>
         </div>
@@ -133,7 +132,7 @@
     <div class="container">
         <!-- Left Image Section -->
         <div class="content">
-            <img src="./images/image.png" alt="Illustration">
+            <img src="/images/image.png" alt="Illustration">
             <h2>Immersive Reading Mode</h2>
             <p>A synchronized ebook and audiobook feature where users can listen to the narration while the text is highlighted, offering a seamless reading and listening experience.</p>
         </div>
@@ -157,24 +156,35 @@
 
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
-
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-
-            const result = await response.json();
             const messageDiv = document.getElementById('message');
 
-            if (response.ok) {
-                messageDiv.textContent = result.message;
-                messageDiv.style.color = 'green';
-                setTimeout(() => {
-                    window.location.href = '/rishis'; // Redirect on successful login
-                }, 1000);
-            } else {
-                messageDiv.textContent = result.error || 'Login failed!';
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const text = await response.text();
+
+                if (response.ok) {
+                    const result = JSON.parse(text);
+                    messageDiv.textContent = result.message;
+                    messageDiv.style.color = 'green';
+                    setTimeout(() => {
+                        window.location.href = result.redirectUrl || '/rishis';
+                    }, 1000);
+                } else {
+                    try {
+                        const error = JSON.parse(text);
+                        messageDiv.textContent = error.error || 'Login failed';
+                    } catch {
+                        messageDiv.textContent = 'Unexpected error occurred';
+                    }
+                    messageDiv.style.color = 'red';
+                }
+            } catch (err) {
+                messageDiv.textContent = 'Could not connect to server';
                 messageDiv.style.color = 'red';
             }
         });

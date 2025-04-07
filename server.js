@@ -9,9 +9,12 @@ const Category = require('./models/Category');
 const Book = require('./models/Book');
 const User = require('./models/User');
 const categoryRoutes = require('./routes/category');
-const authRoutes = require('./routes/login'); 
-const signRoutes = require('./routes/signup'); 
+const loginRoutes = require('./routes/login');
+const signRoutes = require('./routes/signup');
 const profileRoutes = require('./routes/profileRoutes');
+const templeRoutes = require('./routes/temples');
+const uploadRoute = require('./routes/upload'); // adjust path if needed
+const myCollectionRoute = require('./routes/myCollection');
 
 dotenv.config({ path: './.env' });
 
@@ -43,11 +46,12 @@ app.use('/api', require('./routes/login'));
 app.use('/api', require('./routes/signup'));
 app.use('/api', require('./routes/profileRoutes'));
 app.use('/signup', signRoutes);
-app.use('/login', authRoutes);
+app.use('/login', loginRoutes);
 app.use('/category', categoryRoutes);
 app.use('/profile', profileRoutes);
-const templeRoutes = require('./routes/temples'); 
 app.use('/temples', templeRoutes);
+app.use('/upload', uploadRoute);
+app.use('/myCollection', myCollectionRoute);
 
 app.get('/profile', (req, res) => {
   if (!req.session.user) {
@@ -58,23 +62,23 @@ app.get('/profile', (req, res) => {
 });
 app.post("/logout", (req, res) => {
   req.session.destroy(() => {
-      res.json({ success: true });
+    res.json({ success: true });
   });
 });
 
 // Get logged-in user info
 app.get("/me", (req, res) => {
   if (req.session.user) {
-      res.json({ User: req.session.user });
+    res.json({ User: req.session.user });
   } else {
-      res.json({ User: null });
+    res.json({ User: null });
   }
 });
 
 // ✅ **Error Handling Middleware**
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: "Something went wrong!" });
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
 });
 
 
@@ -89,7 +93,10 @@ app.get('/theNorth', (req, res) => res.render('theNorth'));
 app.get('/fort', (req, res) => res.render('fort'));
 app.get('/dance', (req, res) => res.render('dance'));
 app.get('/caves', (req, res) => res.render('caves'));
-
+app.get('/festival', (req, res) => res.render('festival'));
+app.get('/audioBooks', (req, res) => res.render('audioBooks'));
+app.get('/paintings', (req, res) => res.render('paintings'));
+app.get('/historic-cities', (req, res) => res.render('historic-cities'));
 // ✅ **Start Server**
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
 

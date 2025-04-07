@@ -56,22 +56,8 @@
 
                 <div class="mt-4 flex space-x-4">
                     <button id="followBtn" class="bg-red-800 text-white px-4 py-2 rounded">Follow</button>
-                    <button id="uploadBtn" class="bg-red-800 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">Upload</button>
-                </div>
-
-                <div id="uploadMenu" class="hidden absolute mt-2 bg-white rounded-lg shadow-md w-40">
-                    <button onclick="document.getElementById('uploadBook').click()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Upload Book</button>
-                    <button onclick="document.getElementById('uploadThesis').click()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Upload Thesis</button>
-                    <button onclick="document.getElementById('uploadResearch').click()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Upload Research Paper</button>
-                </div>
-
-                <input type="file" id="uploadBook" class="hidden" accept="application/pdf">
-                <input type="file" id="uploadThesis" class="hidden" accept="application/pdf">
-                <input type="file" id="uploadResearch" class="hidden" accept="application/pdf">
-
-                <div class="mt-4">
-                    <h2 class="text-xl font-semibold text-gray-900">Uploaded Documents:</h2>
-                    <ul id="bookList" class="mt-4 list-disc pl-5 text-gray-700"></ul>
+                    <a href="upload">
+                    <button id="uploadBtn" class="bg-red-800 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">Upload</button></a>
                 </div>
             </div>
         </div>

@@ -21,7 +21,22 @@ router.get('/', (req, res) => {
     res.render('dance'); 
 });
 router.get('/', (req, res) => {
+    res.render('festival'); 
+});
+router.get('/', (req, res) => {
+    res.render('audioBooks'); 
+});
+router.get('/', (req, res) => {
+    res.render('paintings'); 
+});
+router.get('/', (req, res) => {
+    res.render('historic-cities'); 
+});
+router.get('/', (req, res) => {
     res.render('caves'); 
+});
+router.get('/', (req, res) => {
+    res.render('audioBooks'); 
 });
 
 module.exports = router;

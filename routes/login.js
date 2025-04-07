@@ -1,38 +1,47 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const User = require('../models/User')
+const User = require('../models/User');
 
-
+// GET /login
 router.get('/', (req, res) => {
     res.render('login');
 });
-// Login route
-router.post('/', async (req, res) => {
-    const { Email, Password } = req.body;
 
-    // Check if email and password exist in the request
-    if (!Email || !Password) {
+// POST /login
+router.post('/', async (req, res) => {
+    const { email, password } = req.body;
+    console.log("BODY FOUND : ",{email,password});
+
+    if (!email || !password) {
         return res.status(400).json({ message: 'Email and password are required' });
     }
 
     try {
-        const user = await User.findOne({ email: Email });
-        console.log()
-        // Check if user exists
+        const user = await User.findOne({ email });
         if (!user) {
-            return res.status(401).json({ message: 'Invalid password' });
+            return res.status(401).json({ message: 'Invalid email or password' });
         }
 
-        // Check password using bcrypt
-        const isMatch = await bcrypt.compare(Password, user.Password);
+        console.log("USER FOUND : ",user);
+
+        const isMatch = await user.comparePassword(password);
+        console.log("PASSWORD MATCH : ",isMatch);
         if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid email ' });
+            return res.status(401).json({ message: 'Invalid email or password' });
         }
 
-        res.status(200).json({ message: 'Login successful', redirectUrl: '/home' });
+        // Save session
+        req.session.user = {
+            _id: user._id,
+            email: user.email,
+            name: user.name
+        };
+
+        res.status(200).json({ message: 'Login successful', redirectUrl: '/rishis' });
+
     } catch (error) {
-        console.error(error);
+        console.error('Login error:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
