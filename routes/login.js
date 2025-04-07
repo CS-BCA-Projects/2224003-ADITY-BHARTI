@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
             name: user.name
         };
 
-        res.status(200).json({ message: 'Login successful', redirectUrl: '/rishis' });
+        res.status(200).json({ message: 'Login successful', redirectUrl: '/profile' });
 
     } catch (error) {
         console.error('Login error:', error);

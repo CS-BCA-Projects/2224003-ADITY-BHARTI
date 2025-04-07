@@ -35,8 +35,6 @@ router.get('/', (req, res) => {
 router.get('/', (req, res) => {
     res.render('caves'); 
 });
-router.get('/', (req, res) => {
-    res.render('audioBooks'); 
-});
+
 
 module.exports = router;

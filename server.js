@@ -5,16 +5,16 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const path = require('path');
-const Category = require('./models/Category');
 const Book = require('./models/Book');
 const User = require('./models/User');
-const categoryRoutes = require('./routes/category');
 const loginRoutes = require('./routes/login');
 const signRoutes = require('./routes/signup');
 const profileRoutes = require('./routes/profileRoutes');
 const templeRoutes = require('./routes/temples');
 const uploadRoute = require('./routes/upload'); // adjust path if needed
 const myCollectionRoute = require('./routes/myCollections');
+const eBooksRoute = require('./routes/eBooks');
+
 
 dotenv.config({ path: './.env' });
 
@@ -47,11 +47,13 @@ app.use('/api', require('./routes/signup'));
 app.use('/api', require('./routes/profileRoutes'));
 app.use('/signup', signRoutes);
 app.use('/login', loginRoutes);
-app.use('/category', categoryRoutes);
 app.use('/profile', profileRoutes);
 app.use('/temples', templeRoutes);
 app.use('/upload', uploadRoute);
 app.use('/myCollections', myCollectionRoute);
+app.use('/eBook', eBooksRoute);
+app.use('/uploads', express.static('uploads'));
+
 
 app.get('/profile', (req, res) => {
   if (!req.session.user) {

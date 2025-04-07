@@ -19,6 +19,15 @@ router.get('/profile', (req, res) => {
     
         res.render('profile', { user: req.session.user });
     });
+    router.get('/profile', (req, res) => {
+        console.log("Session User:", req.session.user); // Debugging
+    
+        if (!req.session.user) {
+            return res.redirect('/login'); // Redirect only if user is not logged in
+        }
+    
+        res.render('profile', { user: req.session.user });
+    });
     
 // Multer setup for file uploads
 const storage = multer.diskStorage({
