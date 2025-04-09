@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const isAdmin = require('../middleware/isAdmin');
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
@@ -14,7 +15,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ["arts", "science", "social", "business", "education", "medicine", "engineering", "other"]
-    }
+    },
+    isAdmin:{
+        type: Boolean,
+        default: false
+    },
+    password: { type: String, required: true },
+    resetPasswordOTP: String,
+    resetPasswordExpires: Date,
 });
 
 

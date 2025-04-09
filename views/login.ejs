@@ -16,27 +16,7 @@
             background: rgb(255, 253, 247);
         }
 
-        /* Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            background: rgb(120, 15, 15);
-            color: white;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 16px;
-        }
-
-        .navbar a:hover {
-            text-decoration: underline;
-        }
-
+       
         /* Container */
         .container {
             display: flex;
@@ -119,15 +99,7 @@
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <h1>RISHIVERSE</h1>
-        <div>
-            <a href="/rishis">Home</a>
-            <a href="#">Chat Forum</a>
-            <a href="/login">Login</a>
-            <a href="/signup">Signup</a>
-        </div>
-    </div>
+    <%- include('./partials/layout') %> 
 
     <div class="container">
         <!-- Left Image Section -->
@@ -174,6 +146,8 @@
                     setTimeout(() => {
                         window.location.href = result.redirectUrl || '/rishis';
                     }, 1000);
+                    alert(result.message);
+                        window.location.href = result.redirectUrl;
                 } else {
                     try {
                         const error = JSON.parse(text);

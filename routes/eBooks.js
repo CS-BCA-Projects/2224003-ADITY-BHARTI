@@ -23,7 +23,7 @@ router.post('/delete', async (req, res) => {
       await Upload.deleteMany({ _id: { $in: selectedIds } });
     }
 
-    res.redirect('/ebooks');
+    res.redirect('/eBook');
   } catch (err) {
     console.error(err);
     res.status(500).send('Error deleting books');

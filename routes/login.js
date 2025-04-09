@@ -35,10 +35,11 @@ router.post('/', async (req, res) => {
         req.session.user = {
             _id: user._id,
             email: user.email,
-            name: user.name
+            name: user.name,
+            isAdmin: user.email === 'adity.sahibganj@gmail.com',
         };
 
-        res.status(200).json({ message: 'Login successful', redirectUrl: '/profile' });
+        res.status(200).json({ message: 'Login successful', redirectUrl: '/rishis' });
 
     } catch (error) {
         console.error('Login error:', error);

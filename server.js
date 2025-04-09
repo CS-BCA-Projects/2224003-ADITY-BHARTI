@@ -14,7 +14,8 @@ const templeRoutes = require('./routes/temples');
 const uploadRoute = require('./routes/upload'); // adjust path if needed
 const myCollectionRoute = require('./routes/myCollections');
 const eBooksRoute = require('./routes/eBooks');
-
+const adminRoutes = require('./routes/admin');
+const isAdmin = require('./middleware/isAdmin');
 
 dotenv.config({ path: './.env' });
 
@@ -41,6 +42,12 @@ app.use(session({
   cookie: { secure: false }
 }));
 
+// After session and login middleware
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null; // makes `user` available in all EJS views
+  next();
+});
+
 // Routes Setup
 app.use('/api', require('./routes/login'));
 app.use('/api', require('./routes/signup'));
@@ -53,6 +60,7 @@ app.use('/upload', uploadRoute);
 app.use('/myCollections', myCollectionRoute);
 app.use('/eBook', eBooksRoute);
 app.use('/uploads', express.static('uploads'));
+app.use('/admin', adminRoutes);
 
 
 app.get('/profile', (req, res) => {
@@ -99,6 +107,7 @@ app.get('/festival', (req, res) => res.render('festival'));
 app.get('/audioBooks', (req, res) => res.render('audioBooks'));
 app.get('/paintings', (req, res) => res.render('paintings'));
 app.get('/historic-cities', (req, res) => res.render('historic-cities'));
+app.get('/admin', isAdmin, (req, res) => {res.render('admin'); });
 // ✅ **Start Server**
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
 
