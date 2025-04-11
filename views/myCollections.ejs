@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,115 +12,135 @@
   <!-- Include Font Awesome for icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
+
 <body class="bg-gray-100 py-10">
   <div class="max-w-6xl mx-auto px-4" x-data="{ activeTab: 'all' }">
     <h2 class="text-3xl font-bold text-center text-red-700 mb-8">My Collections</h2>
 
     <!-- Tab Navigation -->
     <div class="flex justify-center mb-8">
-      <button
-        class="px-4 py-2 mx-2 text-lg font-semibold border border-gray-300 rounded-lg focus:outline-none"
+      <button class="px-4 py-2 mx-2 text-lg font-semibold border border-gray-300 rounded-lg focus:outline-none"
         :class="{ 'bg-red-600 text-white': activeTab === 'all', 'text-gray-700': activeTab !== 'all' }"
-        @click="activeTab = 'all'"
-      >
+        @click="activeTab = 'all'">
         <i class="fas fa-layer-group mr-2"></i> All
       </button>
-      <button
-        class="px-4 py-2 mx-2 text-lg font-semibold border border-gray-300 rounded-lg focus:outline-none"
+      <button class="px-4 py-2 mx-2 text-lg font-semibold border border-gray-300 rounded-lg focus:outline-none"
         :class="{ 'bg-red-600 text-white': activeTab === 'books', 'text-gray-700': activeTab !== 'books' }"
-        @click="activeTab = 'books'"
-      >
+        @click="activeTab = 'books'">
         <i class="fas fa-book mr-2"></i> Books
       </button>
-      <button
-        class="px-4 py-2 mx-2 text-lg font-semibold border border-gray-300 rounded-lg focus:outline-none"
+      <button class="px-4 py-2 mx-2 text-lg font-semibold border border-gray-300 rounded-lg focus:outline-none"
         :class="{ 'bg-red-600 text-white': activeTab === 'theses', 'text-gray-700': activeTab !== 'theses' }"
-        @click="activeTab = 'theses'"
-      >
+        @click="activeTab = 'theses'">
         <i class="fas fa-scroll mr-2"></i> Theses
       </button>
-      <button
-        class="px-4 py-2 mx-2 text-lg font-semibold border border-gray-300 rounded-lg focus:outline-none"
+      <button class="px-4 py-2 mx-2 text-lg font-semibold border border-gray-300 rounded-lg focus:outline-none"
         :class="{ 'bg-red-600 text-white': activeTab === 'research-papers', 'text-gray-700': activeTab !== 'research-papers' }"
-        @click="activeTab = 'research-papers'"
-      >
+        @click="activeTab = 'research-papers'">
         <i class="fas fa-file-alt mr-2"></i> Research Papers
       </button>
     </div>
 
     <!-- All Section -->
     <div x-show="activeTab === 'all'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% uploads.forEach(upload => { %>
+      <% uploads.forEach(upload=> { %>
         <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
           <div class="h-56 w-full overflow-hidden">
-            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>" class="w-full h-full object-cover">
+            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>"
+              class="w-full h-full object-cover">
           </div>
           <div class="p-5">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2"><%= upload.title %></h3>
-            <p class="text-md text-gray-600 mb-1"><strong>Author:</strong> <%= upload.author %></p>
-            <p class="text-md text-gray-600 mb-3"><strong>Type:</strong> <%= upload.type %></p>
-            <a href="/uploads/<%= upload.file %>" target="_blank" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-2">
+              <%= upload.title %>
+            </h3>
+            <p class="text-md text-gray-600 mb-1"><strong>Author:</strong>
+              <%= upload.author %>
+            </p>
+            <p class="text-md text-gray-600 mb-3"><strong>Type:</strong>
+              <%= upload.type %>
+            </p>
+            <a href="/uploads/<%= upload.file %>" target="_blank"
+              class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
               📖 Read PDF
             </a>
           </div>
         </div>
-      <% }) %>
+        <% }) %>
     </div>
 
     <!-- Books Section -->
     <div x-show="activeTab === 'books'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% uploads.filter(upload => upload.type === 'Book').forEach(upload => { %>
+      <% uploads.filter(upload=> upload.type === 'Book').forEach(upload => { %>
         <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
           <div class="h-64 w-full overflow-hidden">
-            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>" class="w-full h-full object-cover">
+            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>"
+              class="w-full h-full object-cover">
           </div>
           <div class="p-5">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2"><%= upload.title %></h3>
-            <p class="text-md text-gray-600 mb-1"><strong>Author:</strong> <%= upload.author %></p>
-            <a href="/uploads/<%= upload.file %>" target="_blank" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-2">
+              <%= upload.title %>
+            </h3>
+            <p class="text-md text-gray-600 mb-1"><strong>Author:</strong>
+              <%= upload.author %>
+            </p>
+            <a href="/uploads/<%= upload.file %>" target="_blank"
+              class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
               📖 Read PDF
             </a>
           </div>
         </div>
-      <% }) %>
+        <% }) %>
     </div>
 
     <!-- Theses Section -->
     <div x-show="activeTab === 'theses'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% uploads.filter(upload => upload.type === 'Thesis').forEach(upload => { %>
+      <% uploads.filter(upload=> upload.type === 'Thesis').forEach(upload => { %>
         <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
           <div class="h-64 w-full overflow-hidden">
-            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>" class="w-full h-full object-cover">
+            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>"
+              class="w-full h-full object-cover">
           </div>
           <div class="p-5">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2"><%= upload.title %></h3>
-            <p class="text-md text-gray-600 mb-1"><strong>Author:</strong> <%= upload.author %></p>
-            <a href="/uploads/<%= upload.file %>" target="_blank" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-2">
+              <%= upload.title %>
+            </h3>
+            <p class="text-md text-gray-600 mb-1"><strong>Author:</strong>
+              <%= upload.author %>
+            </p>
+            <a href="/uploads/<%= upload.file %>"
+              class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
               📖 Read PDF
             </a>
           </div>
         </div>
-      <% }) %>
+        <% }) %>
     </div>
 
     <!-- Research Papers Section -->
     <div x-show="activeTab === 'research-papers'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% uploads.filter(upload => upload.type === 'Research Paper').forEach(upload => { %>
+      <% uploads.filter(upload=> upload.type === 'Research Paper').forEach(upload => { %>
         <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
           <div class="h-64 w-full overflow-hidden">
-            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>" class="w-full h-full object-cover">
+            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>"
+              class="w-full h-full object-cover">
           </div>
           <div class="p-5">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2"><%= upload.title %></h3>
-            <p class="text-md text-gray-600 mb-1"><strong>Author:</strong> <%= upload.author %></p>
-            <a href="/uploads/<%= upload.file %>" target="_blank" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-2">
+              <%= upload.title %>
+            </h3>
+            <p class="text-md text-gray-600 mb-1"><strong>Author:</strong>
+              <%= upload.author %>
+            </p>
+            <a href="/uploads/<%= upload.file %>" target="_blank"
+              class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
               📖 Read PDF
             </a>
           </div>
         </div>
-      <% }) %>
+        <% }) %>
     </div>
 
   </div>
 </body>
+
 </html>

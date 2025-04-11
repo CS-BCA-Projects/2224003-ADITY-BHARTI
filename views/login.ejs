@@ -115,7 +115,7 @@
             <form id="loginForm">
                 <input type="email" id="email" class="input-field" placeholder="Email address" required>
                 <input type="password" id="password" class="input-field" placeholder="Password" required>
-                <a href="#" class="password-recovery">Forgot Password?</a>
+                <a href="forgot-password" class="password-recovery">Forgot Password?</a>
                 <button type="submit" class="continue-btn">Login</button>
             </form>
             <div id="message"></div>
@@ -143,6 +143,9 @@
                     const result = JSON.parse(text);
                     messageDiv.textContent = result.message;
                     messageDiv.style.color = 'green';
+
+                    localStorage.setItem("userData", JSON.stringify({ email }));
+
                     setTimeout(() => {
                         window.location.href = result.redirectUrl || '/rishis';
                     }, 1000);

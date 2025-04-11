@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const { sendSignupEmail } = require('../utils/mailer'); // adjust path if needed
 
 router.get('/', (req, res) => res.render('signup')); // Render Signup Page
 
@@ -21,9 +22,9 @@ router.post('/', async (req, res) => {
       }
 
       const newUser = await User.create({ email, password, username, profession, study });
-
+      await sendSignupEmail(email, username);
       req.session.user = newUser; 
-      res.json({ message: "Signup successful!" , redirectUrl :'/rishis' });
+      res.json({ message: "Signup successful!" , redirectUrl :'/' });
       
   } catch (error) {
       console.error(error);

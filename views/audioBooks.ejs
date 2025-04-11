@@ -150,6 +150,22 @@
     </div>
   </div>
 
+  <div class="book-item" onclick="showControls('audio4')">
+    <img src="/images/gandhiji.jpg" alt="Book 4 Cover">
+    <audio id="audio4" src="/audio/prayer_speech_4.mp3" ontimeupdate="updateProgress('audio4')"></audio>
+    <div class="controls" id="controls-audio4">
+      <div class="button-group">
+        <button onclick="togglePlayPause(event, 'audio4')">Play</button>
+        <button onclick="restartAudio(event, 'audio4')">Restart</button>
+        <button onclick="skipForward(event, 'audio4')">+10s</button>
+      </div>
+      <div class="progress-bar">
+        <input type="range" id="progress-audio4" value="0" step="1" onchange="seekAudio('audio4')">
+      </div>
+    </div>
+  </div>
+</div>
+
   <script>
     function showControls(id) {
       // Pause others

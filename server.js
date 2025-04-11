@@ -16,7 +16,7 @@ const myCollectionRoute = require('./routes/myCollections');
 const eBooksRoute = require('./routes/eBooks');
 const adminRoutes = require('./routes/admin');
 const isAdmin = require('./middleware/isAdmin');
-
+const authRoutes = require('./routes/auth');
 dotenv.config({ path: './.env' });
 
 const PORT = process.env.PORT || 5001;
@@ -61,6 +61,8 @@ app.use('/myCollections', myCollectionRoute);
 app.use('/eBook', eBooksRoute);
 app.use('/uploads', express.static('uploads'));
 app.use('/admin', adminRoutes);
+app.use('/', authRoutes); 
+
 
 
 app.get('/profile', (req, res) => {
@@ -97,7 +99,8 @@ app.use((err, req, res, next) => {
 // ✅ **Render Other Pages**
 
 app.get('/download', (req, res) => res.render('download'));
-app.get('/rishis', (req, res) => res.render('rishis'));
+app.get('/', (req, res) =>
+   res.render('rishis'));
 app.get('/agrarian', (req, res) => res.render('agrarian'));
 app.get('/theNorth', (req, res) => res.render('theNorth'));
 app.get('/fort', (req, res) => res.render('fort'));
@@ -108,6 +111,12 @@ app.get('/audioBooks', (req, res) => res.render('audioBooks'));
 app.get('/paintings', (req, res) => res.render('paintings'));
 app.get('/historic-cities', (req, res) => res.render('historic-cities'));
 app.get('/admin', isAdmin, (req, res) => {res.render('admin'); });
+app.get('/ayurveda', (req, res) => {res.render('ayurveda'); });
+app.get('/scientist', (req, res) => {res.render('scientist'); });
+app.get('/flipbook/:filename', (req, res) => {
+  const filename = req.params.filename;
+  res.render('flipbook', { pdfFile: filename });
+});
 // ✅ **Start Server**
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
 

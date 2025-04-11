@@ -1,11 +1,13 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
-    title:{type: String, required:true},
-    author: {type: String, required:true},
-    genre:{type: mongoose.Schema.Types.ObjectId, ref: 'Category',required:true},
-    description: {type:String},
-    contentUrl: {type:String }// If storing a link to the book content
+  title: String,
+  author: String,
+  description: String,
+  category: String, // 'Thesis', 'Research Paper', or 'Book'
+  coverImage: String,
+  pdfPath: String,
+  uploadedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Book', bookSchema);

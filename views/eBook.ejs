@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>eBooks Library</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
@@ -10,65 +11,81 @@
     .scroll-container::-webkit-scrollbar {
       display: none;
     }
+
     .scroll-container {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
   </style>
 </head>
+
 <body class="bg-gray-50">
   <%- include('partials/layout') %>
 
-  <div class="max-w-7xl mx-auto mt-10 px-4">
-    <h2 class="text-4xl font-bold text-center text-red-700 mb-10">📚 All eBooks Library</h2>
+    <div class="max-w-7xl mx-auto mt-10 px-4">
+      <h2 class="text-4xl font-bold text-center text-red-700 mb-10">📚 All eBooks Library</h2>
 
-    <% const types = ['Book', 'Thesis', 'Research Paper']; %>
+      <% const types=['Book', 'Thesis' , 'Research Paper' ]; %>
 
-    <% types.forEach(type => { %>
-      <div class="mb-20">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-2xl font-semibold text-gray-800 border-b-4 border-red-500 pb-1"><%= type %>s</h3>
-          <div class="flex gap-2">
-            <button onclick="scrollSlider('<%= type %>', -1)" class="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md">
-              &#10094;
-            </button>
-            <button onclick="scrollSlider('<%= type %>', 1)" class="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md">
-              &#10095;
-            </button>
-          </div>
-        </div>
-
-        <% const typeUploads = uploads.filter(upload => upload.type === type); %>
-        <% if (typeUploads.length === 0) { %>
-          <p class="text-center text-gray-500 mb-8">No <%= type.toLowerCase() %>s uploaded yet.</p>
-        <% } else { %>
-          <div id="slider-<%= type %>" class="scroll-container flex overflow-x-auto gap-6 transition-all duration-300 pb-2">
-            <% typeUploads.forEach(upload => { %>
-              <div class="min-w-[300px] bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
-                <img src="/uploads/<%= upload.cover %>" alt="<%= upload.title %> Cover" class="w-full h-56 object-cover">
-                <div class="p-4">
-                  <h3 class="text-xl font-semibold text-gray-800 mb-1"><%= upload.title %></h3>
-                  <p class="text-sm text-gray-600 mb-1"><strong>Author:</strong> <%= upload.author %></p>
-                  <p class="text-sm text-gray-600 mb-3"><strong>Type:</strong> <%= upload.type %></p>
-                  <a href="/uploads/<%= upload.file %>" target="_blank"
-                     class="inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition">
-                    📖 Read PDF
-                  </a>
-                </div>
+        <% types.forEach(type=> { %>
+          <div class="mb-20">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-2xl font-semibold text-gray-800 border-b-4 border-red-500 pb-1">
+                <%= type %>s
+              </h3>
+              <div class="flex gap-2">
+                <button onclick="scrollSlider('<%= type %>', -1)"
+                  class="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+                  &#10094;
+                </button>
+                <button onclick="scrollSlider('<%= type %>', 1)"
+                  class="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+                  &#10095;
+                </button>
               </div>
-            <% }); %>
-          </div>
-        <% } %>
-      </div>
-    <% }); %>
-  </div>
+            </div>
 
-  <script>
-    function scrollSlider(type, direction) {
-      const slider = document.getElementById('slider-' + type);
-      const scrollAmount = 320;
-      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-    }
-  </script>
+            <% const typeUploads=uploads.filter(upload=> upload.type === type); %>
+              <% if (typeUploads.length===0) { %>
+                <p class="text-center text-gray-500 mb-8">No <%= type.toLowerCase() %>s uploaded yet.</p>
+                <% } else { %>
+                  <div id="slider-<%= type %>"
+                    class="scroll-container flex overflow-x-auto gap-6 transition-all duration-300 pb-2">
+                    <% typeUploads.forEach(upload=> { %>
+                      <div class="min-w-[300px] bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
+                        <img src="/uploads/<%= upload.cover %>" alt="<%= upload.title %> Cover"
+                          class="w-full h-56 object-cover">
+                        <div class="p-4">
+                          <h3 class="text-xl font-semibold text-gray-800 mb-1">
+                            <%= upload.title %>
+                          </h3>
+                          <p class="text-sm text-gray-600 mb-1"><strong>Author:</strong>
+                            <%= upload.author %>
+                          </p>
+                          <p class="text-sm text-gray-600 mb-3"><strong>Type:</strong>
+                            <%= upload.type %>
+                          </p>
+                          <a href="/uploads/<%= upload.file %>" target="_blank"
+                            class="inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition">
+                            📖 Read PDF
+                          </a>
+                          
+                        </div>
+                      </div>
+                      <% }); %>
+                  </div>
+                  <% } %>
+          </div>
+          <% }); %>
+    </div>
+
+    <script>
+      function scrollSlider(type, direction) {
+        const slider = document.getElementById('slider-' + type);
+        const scrollAmount = 320;
+        slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+      }
+    </script>
 </body>
+
 </html>
