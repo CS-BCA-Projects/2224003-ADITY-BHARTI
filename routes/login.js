@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
 
 // POST /login
 router.post('/', async (req, res) => {
-    const { email, password } = req.body;
-    console.log("BODY FOUND : ", { email, password });
+    const { email, password,username } = req.body;
+    console.log("BODY FOUND : ", { email, password, username });
 
     if (!email || !password) {
         return res.status(400).json({ message: 'Email and password are required' });
@@ -35,11 +35,12 @@ router.post('/', async (req, res) => {
         req.session.user = {
             _id: user._id,
             email: user.email,
-            name: user.name,
+            username: user.username,
             isAdmin: user.email === 'adity.sahibganj@gmail.com',
         };
 
         res.status(200).json({ message: 'Login successful', redirectUrl: '/' });
+        console.log("Session user after login:", req.session.user);
 
     } catch (error) {
         console.error('Login error:', error);

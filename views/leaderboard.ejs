@@ -1,0 +1,40 @@
+<!-- views/leaderboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaderboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-yellow-50 p-6">
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-3xl font-bold text-red-700">🏆 Leaderboard</h1>
+      <div>
+        <% if (username) { %>
+          <span class="text-gray-700">Welcome, <%= username %></span>
+        <% } else { %>
+          <a href="/login" class="text-blue-600 underline">Login to Play</a>
+        <% } %>
+      </div>
+    </div>
+    <% if (error) { %>
+      <p class="text-red-600 text-center"><%= error %></p>
+    <% } else if (scores.length === 0) { %>
+      <p class="text-center text-gray-600">No scores yet. Play a quiz to join the leaderboard!</p>
+    <% } else { %>
+      <ul class="divide-y">
+        <% scores.forEach((s, i) => { %>
+          <li class="flex justify-between py-3">
+            <span><%= i + 1 %>. <%= s.userId ? s.userId.username : 'Guest' %></span>
+            <span class="font-semibold text-green-600"><%= s.score %> pts</span>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+    <div class="text-center mt-6">
+      <a href="/quiz" class="text-blue-600 underline">⬅ Back to Quiz</a>
+    </div>
+  </div>
+</body>
+</html>

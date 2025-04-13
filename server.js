@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const path = require('path');
-const Book = require('./models/Book');
+const Book = require('./models/book');
 const User = require('./models/User');
 const loginRoutes = require('./routes/login');
 const signRoutes = require('./routes/signup');
@@ -18,7 +18,8 @@ const adminRoutes = require('./routes/admin');
 const isAdmin = require('./middleware/isAdmin');
 const authRoutes = require('./routes/auth');
 dotenv.config({ path: './.env' });
-
+const quizRoutes = require('./routes/quiz');
+const leaderboardRoutes = require('./routes/leaderboard');
 const PORT = process.env.PORT || 5001;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://adity07:mongoose123@cluster0.nt08p.mongodb.net/RishiVerse?retryWrites=true&w=majority";
 
@@ -36,6 +37,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 
 app.use(session({
+  id: "user_id",
   secret: "your_secret_key",
   resave: false,
   saveUninitialized: true,
@@ -62,7 +64,8 @@ app.use('/eBook', eBooksRoute);
 app.use('/uploads', express.static('uploads'));
 app.use('/admin', adminRoutes);
 app.use('/', authRoutes); 
-
+app.use('/quiz', quizRoutes);
+app.use('/leaderboard', leaderboardRoutes);
 
 
 app.get('/profile', (req, res) => {

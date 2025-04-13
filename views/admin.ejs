@@ -6,16 +6,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-10">
-  <h1 class="text-4xl font-bold mb-8 text-center text-red-700">Admin Dashboard</h1>
+  <h1 class="text-4xl font-bold mb-10 text-center text-red-700">Admin Dashboard</h1>
 
   <!-- USERS SECTION -->
-  <h2 class="text-2xl font-semibold mb-4">All Users</h2>
+  <h2 class="text-2xl font-semibold mb-4">👤 All Users</h2>
   <div class="overflow-x-auto mb-10">
     <table class="w-full text-left bg-white rounded-lg shadow">
       <thead class="bg-gray-200">
         <tr>
           <th class="p-3">Username</th>
           <th class="p-3">Email</th>
+          <th class="p-3">Role</th>
           <th class="p-3">Actions</th>
         </tr>
       </thead>
@@ -37,8 +38,8 @@
   </div>
 
   <!-- UPLOADS SECTION -->
-  <h2 class="text-2xl font-semibold mb-4">All Uploads</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <h2 class="text-2xl font-semibold mb-4">📚 All Uploads</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
     <% uploads.forEach(upload => { %>
       <div class="bg-white shadow rounded-lg p-4">
         <img src="/uploads/<%= upload.cover %>" class="w-full h-48 object-cover rounded" />
@@ -50,5 +51,69 @@
       </div>
     <% }) %>
   </div>
+
+  <!-- QUIZ CREATION SECTION -->
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold text-red-700 mb-6">📝 Add New Quiz</h2>
+    <form action="/admin/add-quiz" method="POST" class="space-y-4">
+      <div>
+        <label class="block mb-1 font-medium">Quiz Title</label>
+        <input name="title" placeholder="Quiz Title" required class="w-full border p-2 rounded">
+      </div>
+      <div>
+        <label class="block mb-1 font-medium">Description</label>
+        <input name="description" placeholder="Short Description" required class="w-full border p-2 rounded">
+      </div>
+      <div class="flex space-x-4">
+        <div class="w-1/2">
+          <label class="block mb-1 font-medium">Level</label>
+          <select name="level" required class="w-full border p-2 rounded">
+            <option value="">Select Level</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Expert</option>
+          </select>
+        </div>
+        <div class="w-1/2">
+          <label class="block mb-1 font-medium">Topic / Category</label>
+          <input name="category" placeholder="e.g., Vedas, Ayurveda" required class="w-full border p-2 rounded">
+        </div>
+      </div>
+
+      <!-- Dynamic Question Section -->
+      <div id="questions-container" class="space-y-6 mt-6"></div>
+      <button type="button" onclick="addQuestion()" class="bg-yellow-500 px-4 py-2 rounded text-white hover:bg-yellow-600">
+        ➕ Add Question
+      </button>
+
+      <div>
+        <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 mt-6">
+          ✅ Submit Quiz
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Dynamic Question Template -->
+  <script>
+    function addQuestion() {
+      const container = document.getElementById('questions-container');
+      const index = container.children.length;
+
+      container.innerHTML += `
+        <div class="border p-4 bg-gray-50 rounded shadow">
+          <h3 class="font-semibold mb-2 text-lg text-gray-700">Question ${index + 1}</h3>
+          <input name="questions[${index}][questionText]" placeholder="Question text" required class="w-full border p-2 mb-2 rounded">
+          <input name="questions[${index}][options][]" placeholder="Option 1" required class="w-full border p-2 mb-1 rounded">
+          <input name="questions[${index}][options][]" placeholder="Option 2" required class="w-full border p-2 mb-1 rounded">
+          <input name="questions[${index}][options][]" placeholder="Option 3" required class="w-full border p-2 mb-1 rounded">
+          <input name="questions[${index}][options][]" placeholder="Option 4" required class="w-full border p-2 mb-2 rounded">
+          <input name="questions[${index}][correctAnswer]" type="number" min="0" max="3" placeholder="Correct Option Index (0-3)" required class="w-full border p-2 mb-2 rounded">
+          <input name="questions[${index}][fact]" placeholder="Fact shown after answer" required class="w-full border p-2 rounded">
+        </div>
+      `;
+    }
+  </script>
+
 </body>
 </html>

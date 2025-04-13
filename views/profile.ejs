@@ -27,48 +27,53 @@
 </head>
 <body>
     <%- include('./partials/layout') %>
-    <main class="flex-1 ml-20 p-8">
-    <main class="profile-container">
-        <div class="bg-rgb(255 241 196) rounded-xl shadow-sm overflow-hidden p-6">
-            <div class="h-20 bg-cover bg-center" style="background-image: url('default-cover.jpg')"></div>
-            <div class="px-8 pb-8">
-                <div class="flex items-center -mt-16">
-                    <div class="relative">
-                        <img id="profileImage" src="default-profile.jpg" class="w-32 h-32 rounded-full border-4 border-white object-cover">
-                        <input type="file" id="uploadProfile" class="hidden" accept="image/*">
-                        <button onclick="document.getElementById('uploadProfile').click()" 
-                                class="absolute bottom-2 right-2 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center cursor-pointer hover:bg-gray-50">
-                            <i class="ri-camera-line text-gray-600"></i>
-                        </button>
-                    </div>
-                    <div class="ml-6 flex items-center space-x-4">
-                        <h1 class="text-2xl font-bold text-gray-900" id="userName"></h1>
-                        <p class="text-gray-600" id="followersCount">0 Followers</p>
-                        <p class="text-gray-600" id="followingCount">0 Following</p>
-                    </div>
-                </div>
-                
-                <div class="mt-2">
-                    <p class="text-gray-600 cursor-pointer" id="userBio" onclick="editBio()">Click to add bio</p>
-                    <p class="text-gray-600" id="userProfession"></p>
-                    <p class="text-gray-600" id="userStudy"></p>
-                </div>
 
-                <div class="mt-4 flex space-x-4">
-                    <button id="followBtn" class="bg-red-800 text-white px-4 py-2 rounded">Follow</button>
-                    <a href="upload">
-                    <button id="uploadBtn" class="bg-red-800 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">Upload</button></a>
+    <main class="flex-1 ml-20 p-8">
+        <main class="profile-container">
+            <div class="bg-rgb(255 241 196) rounded-xl shadow-sm overflow-hidden p-6">
+                <div class="h-20 bg-cover bg-center" style="background-image: url('default-cover.jpg')"></div>
+                <div class="px-8 pb-8">
+                    <div class="flex items-center -mt-16">
+                        <div class="relative">
+                            <img id="profileImage" src="default-profile.jpg" class="w-32 h-32 rounded-full border-4 border-white object-cover">
+                            <input type="file" id="uploadProfile" class="hidden" accept="image/*">
+                            <button onclick="document.getElementById('uploadProfile').click()" 
+                                    class="absolute bottom-2 right-2 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center cursor-pointer hover:bg-gray-50">
+                                <i class="ri-camera-line text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="ml-6 flex items-center space-x-4">
+                            <h1 class="text-2xl font-bold text-gray-900" id="userName"><%= user.username %></h1>
+                            <p class="text-gray-600" id="followersCount">0 Followers</p>
+                            <p class="text-gray-600" id="followingCount">0 Following</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <p class="text-gray-600 cursor-pointer" id="userBio" onclick="editBio()">Click to add bio</p>
+                        <p class="text-gray-600" id="userProfession">Profession</p>
+                        <p class="text-gray-600" id="userStudy"></p>
+                    </div>
+
+                    <div class="mt-4 flex space-x-4">
+                        <button id="followBtn" class="bg-red-800 text-white px-4 py-2 rounded">Follow</button>
+                        <a href="/upload">
+                            <button id="uploadBtn" class="bg-red-800 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">Upload</button>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     </main>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const userData = JSON.parse(localStorage.getItem("userData")) || {};
-            document.getElementById("userName").textContent = userData.username || "User Name";
+
+            // Bio and profession from localStorage (editable)
             document.getElementById("userBio").textContent = userData.bio || "Click to add bio";
-            document.getElementById("userProfession").textContent = userData.profession || "Profession";            document.getElementById("followersCount").textContent = `${userData.followers || 0} Followers`;
+            document.getElementById("userProfession").textContent = userData.profession || "Profession";
+            document.getElementById("followersCount").textContent = `${userData.followers || 0} Followers`;
             document.getElementById("followingCount").textContent = `${userData.following || 0} Following`;
 
             const profileImage = localStorage.getItem("profileImage");
@@ -87,10 +92,6 @@
 
             document.getElementById("followBtn").addEventListener("click", function() {
                 this.textContent = this.textContent === "Follow" ? "Following" : "Follow";
-            });
-
-            document.getElementById("uploadBtn").addEventListener("click", function() {
-                document.getElementById("uploadMenu").classList.toggle("hidden");
             });
         });
 

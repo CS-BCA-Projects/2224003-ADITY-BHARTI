@@ -1,0 +1,235 @@
+<!-- views/quiz.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ancient Wisdom Quiz Zone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Sound Effects -->
+  <audio id="correctSound" src="/audio/correct.mp3"></audio>
+  <audio id="wrongSound" src="/audio/wrong.mp3"></audio>
+  <audio id="clickSound" src="/audio/click.mp3"></audio>
+
+  <style>
+    .timer {
+      font-weight: bold;
+      font-size: 18px;
+      color: #b91c1c;
+    }
+  </style>
+</head>
+<body class="bg-yellow-50 min-h-screen font-sans">
+  <div class="max-w-3xl mx-auto p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-4xl font-bold text-red-700">📖 Ancient Wisdom Quiz Zone</h1>
+      <div>
+        <span class="text-gray-700">Welcome, <%= username %></span>
+      </div>
+    </div>
+
+    <!-- Start Box -->
+    <div id="start-box" class="text-center">
+      <lottie-player
+        src="https://lottie.host/4a6e998f-8c67-4ef9-871f-345f5f69cfd6/n0NQ1RIc4n.json"
+        background="transparent"
+        speed="1"
+        style="width: 280px; height: 280px; margin: auto"
+        loop autoplay>
+      </lottie-player>
+
+      <form id="quizForm" class="mt-4 space-y-4">
+        <div>
+          <select id="level" required class="p-2 border rounded mr-2">
+            <option value="">Select Level</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Expert">Expert</option>
+          </select>
+        </div>
+
+        <button type="submit" class="bg-red-600 text-white px-6 py-3 rounded-lg shadow hover:bg-red-700">
+          Start Quiz
+        </button>
+      </form>
+    </div>
+
+    <!-- Quiz Box -->
+    <div id="quiz-box" class="bg-white shadow-xl rounded-lg p-6 mt-6 hidden">
+      <!-- Progress Bar -->
+      <div class="w-full bg-gray-300 rounded-full h-3 mb-4">
+        <div id="progress-bar" class="bg-red-500 h-3 rounded-full" style="width: 0%"></div>
+      </div>
+
+      <div class="flex justify-between items-center mb-4">
+        <div id="question-count" class="text-gray-600"></div>
+        <div class="timer" id="timer">Time Left: 30s</div>
+      </div>
+
+      <h2 id="question-text" class="text-xl font-semibold text-gray-800 mb-4"></h2>
+
+      <div id="options" class="space-y-2">
+        <!-- Options will be injected here -->
+      </div>
+
+      <button onclick="nextQuestion()" id="next-btn" class="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 hidden">Next</button>
+
+      <div id="fact-box" class="mt-4 text-green-700 font-medium hidden"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let questions = [];
+      let current = 0;
+      let score = 0;
+      let timer;
+      let level = '';
+      let userAnswers = [];
+
+      document.getElementById('quizForm').addEventListener('submit', loadQuiz);
+
+      async function loadQuiz(e) {
+        e.preventDefault();
+        level = document.getElementById('level').value;
+
+        try {
+          const res = await fetch(`/quiz/data?level=${level}`);
+          const data = await res.json();
+
+          if (data.error) {
+            console.error('Server error:', data.error);
+            alert(data.error);
+            return;
+          }
+
+          questions = data;
+          console.log('Loaded questions:', questions);
+
+          if (!questions.length) {
+            alert('No questions found for this level!');
+            return;
+          }
+
+          document.getElementById('start-box').style.display = 'none';
+          document.getElementById('quiz-box').style.display = 'block';
+          current = 0;
+          score = 0;
+          userAnswers = [];
+          showQuestion();
+        } catch (error) {
+          console.error('Error loading quiz:', error);
+          alert('Failed to load quiz. Please try again.');
+        }
+      }
+
+      function showQuestion() {
+        if (current >= questions.length) {
+          endQuiz();
+          return;
+        }
+
+        const q = questions[current];
+        if (!q || !q.text || !Array.isArray(q.options) || q.correct == null || !q.fact) {
+          console.error('Invalid question at index', current, ':', q);
+          alert('Error displaying question. Ending quiz.');
+          endQuiz();
+          return;
+        }
+
+        document.getElementById('question-text').innerText = q.text;
+        document.getElementById('question-count').innerText = `Question ${current + 1} of ${questions.length}`;
+        document.getElementById('progress-bar').style.width = `${((current + 1) / questions.length) * 100}%`;
+
+        const optionsHTML = q.options.map((opt, idx) => `
+          <button class="w-full border p-2 rounded hover:bg-gray-100"
+                  onclick="checkAnswer(${idx}, this)">${opt}</button>
+        `).join('');
+        document.getElementById('options').innerHTML = optionsHTML;
+
+        document.getElementById('fact-box').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
+        startTimer();
+      }
+
+      function startTimer() {
+        let time = 30;
+        document.getElementById('timer').innerText = `Time Left: ${time}s`;
+        clearInterval(timer);
+        timer = setInterval(() => {
+          time--;
+          document.getElementById('timer').innerText = `Time Left: ${time}s`;
+          if (time <= 0) {
+            clearInterval(timer);
+            userAnswers.push(-1);
+            nextQuestion();
+          }
+        }, 1000);
+      }
+
+      window.checkAnswer = function(index, btn) {
+        const q = questions[current];
+        clearInterval(timer);
+        const buttons = document.querySelectorAll('#options button');
+
+        buttons.forEach((b, i) => {
+          b.disabled = true;
+          if (i === q.correct) {
+            b.classList.add('bg-green-200');
+          } else if (i === index) {
+            b.classList.add('bg-red-200');
+          }
+        });
+
+        userAnswers[current] = index;
+
+        if (index === q.correct) {
+          score++;
+          document.getElementById('correctSound').play();
+        } else {
+          document.getElementById('wrongSound').play();
+        }
+
+        document.getElementById('fact-box').innerText = `🕉️ ${q.fact}`;
+        document.getElementById('fact-box').style.display = 'block';
+        document.getElementById('next-btn').style.display = 'inline-block';
+      }
+
+      window.nextQuestion = function() {
+        document.getElementById('clickSound').play();
+        current++;
+        showQuestion();
+      }
+
+      function endQuiz() {
+        clearInterval(timer);
+        fetch('/quiz/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ score, level, answers: userAnswers })
+        })
+          .then(res => res.json())
+          .then(data => console.log('Score submit response:', data))
+          .catch(err => console.error('Error submitting score:', err));
+
+        const perfect = score === questions.length;
+        if (perfect) {
+          confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+        }
+
+        document.getElementById('quiz-box').innerHTML = `
+          <h2 class="text-xl font-semibold text-center text-green-700 mb-4">🎉 You scored ${score} / ${questions.length}</h2>
+          ${perfect ? `<p class="text-center text-xl text-yellow-600 font-bold">🌟 Perfect Score! You're a true Rishi! 🌟</p>` : ''}
+          <div class="text-center space-y-4 mt-6">
+            <a href="/quiz/result?score=${score}&level=${level}" class="text-blue-600 underline">📊 View Results</a><br>
+            <a href="/quiz" class="text-blue-600 underline">🔁 Retry Quiz</a><br>
+            <a href="/leaderboard" class="text-yellow-600 underline">🏆 View Leaderboard</a>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>
