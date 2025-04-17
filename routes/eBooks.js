@@ -1,11 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const Upload = require('../models/upload'); // Your Mongoose model
+const Upload = require('../models/upload');
 
-// GET /ebooks - public route
 router.get('/', async (req, res) => {
   try {
-    const uploads = await Upload.find({}).sort({ createdAt: -1 }); // fetch all uploads
+    const uploads = await Upload.find({}).sort({ createdAt: -1 });
+
+    // Process uploads to ensure correct URL format
+    uploads.forEach(upload => {
+      if (upload.cover && upload.cover.url) {
+        upload.cover = { url: upload.cover.url }; // Cloudinary URL for cover
+      } else {
+        upload.cover = { url: '/uploads/' + (upload.cover || 'default-cover.jpg') }; // Fallback for local or missing cover
+      }
+      if (upload.file && upload.file.url) {
+        upload.file = { url: upload.file.url }; // Cloudinary URL for file
+      } else {
+        upload.file = { url: '/uploads/' + (upload.file || 'default-file.pdf') }; // Fallback for local or missing file
+      }
+    });
+
     res.render('eBook', { uploads });
   } catch (err) {
     console.error(err);
@@ -29,6 +43,5 @@ router.post('/delete', async (req, res) => {
     res.status(500).send('Error deleting books');
   }
 });
-
 
 module.exports = router;

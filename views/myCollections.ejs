@@ -43,10 +43,10 @@
 
     <!-- All Section -->
     <div x-show="activeTab === 'all'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% uploads.forEach(upload=> { %>
+      <% uploads.forEach(upload => { %>
         <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
           <div class="h-56 w-full overflow-hidden">
-            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>"
+            <img src="<%= upload.cover.url %>" alt="Cover of <%= upload.title %>"
               class="w-full h-full object-cover">
           </div>
           <div class="p-5">
@@ -59,21 +59,21 @@
             <p class="text-md text-gray-600 mb-3"><strong>Type:</strong>
               <%= upload.type %>
             </p>
-            <a href="/uploads/<%= upload.file %>" target="_blank"
+            <a href="<%= upload.file.url %>" target="_blank"
               class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
               📖 Read PDF
             </a>
           </div>
         </div>
-        <% }) %>
+      <% }) %>
     </div>
 
     <!-- Books Section -->
     <div x-show="activeTab === 'books'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% uploads.filter(upload=> upload.type === 'Book').forEach(upload => { %>
+      <% uploads.filter(upload => upload.type === 'Book').forEach(upload => { %>
         <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
           <div class="h-64 w-full overflow-hidden">
-            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>"
+            <img src="<%= upload.cover.url %>" alt="Cover of <%= upload.title %>"
               class="w-full h-full object-cover">
           </div>
           <div class="p-5">
@@ -83,21 +83,21 @@
             <p class="text-md text-gray-600 mb-1"><strong>Author:</strong>
               <%= upload.author %>
             </p>
-            <a href="/uploads/<%= upload.file %>" target="_blank"
+            <a href="<%= upload.file.url %>" target="_blank"
               class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
               📖 Read PDF
             </a>
           </div>
         </div>
-        <% }) %>
+      <% }) %>
     </div>
 
     <!-- Theses Section -->
     <div x-show="activeTab === 'theses'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% uploads.filter(upload=> upload.type === 'Thesis').forEach(upload => { %>
+      <% uploads.filter(upload => upload.type === 'Thesis').forEach(upload => { %>
         <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
           <div class="h-64 w-full overflow-hidden">
-            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>"
+            <img src="<%= upload.cover.url %>" alt="Cover of <%= upload.title %>"
               class="w-full h-full object-cover">
           </div>
           <div class="p-5">
@@ -107,21 +107,21 @@
             <p class="text-md text-gray-600 mb-1"><strong>Author:</strong>
               <%= upload.author %>
             </p>
-            <a href="/uploads/<%= upload.file %>"
+            <a href="<%= upload.file.url %>" target="_blank"
               class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
               📖 Read PDF
             </a>
           </div>
         </div>
-        <% }) %>
+      <% }) %>
     </div>
 
     <!-- Research Papers Section -->
     <div x-show="activeTab === 'research-papers'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% uploads.filter(upload=> upload.type === 'Research Paper').forEach(upload => { %>
+      <% uploads.filter(upload => upload.type === 'Research Paper').forEach(upload => { %>
         <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
           <div class="h-64 w-full overflow-hidden">
-            <img src="/uploads/<%= upload.cover %>" alt="Cover of <%= upload.title %>"
+            <img src="<%= upload.cover.url %>" alt="Cover of <%= upload.title %>"
               class="w-full h-full object-cover">
           </div>
           <div class="p-5">
@@ -131,13 +131,13 @@
             <p class="text-md text-gray-600 mb-1"><strong>Author:</strong>
               <%= upload.author %>
             </p>
-            <a href="/uploads/<%= upload.file %>" target="_blank"
+            <a href="<%= upload.file.url %>" target="_blank"
               class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
               📖 Read PDF
             </a>
           </div>
         </div>
-        <% }) %>
+      <% }) %>
     </div>
 
   </div>

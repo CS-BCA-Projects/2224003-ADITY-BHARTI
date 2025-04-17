@@ -41,6 +41,13 @@ router.get('/', (req, res) => {
 router.get('/', (req, res) => {
     res.render('scientist'); 
 });
-
-
+router.get('/', (req, res) => {
+    res.render('folkStories'); 
+});
+router.get('/', (req, res) => {
+    res.render('queen'); 
+});
+router.get('/', (req, res) => {
+    res.render('poem'); 
+});
 module.exports = router;

@@ -17,9 +17,10 @@ const eBooksRoute = require('./routes/eBooks');
 const adminRoutes = require('./routes/admin');
 const isAdmin = require('./middleware/isAdmin');
 const authRoutes = require('./routes/auth');
-dotenv.config({ path: './.env' });
 const quizRoutes = require('./routes/quiz');
 const leaderboardRoutes = require('./routes/leaderboard');
+require('dotenv').config();
+dotenv.config({ path: './.env' });
 const PORT = process.env.PORT || 5001;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://adity07:mongoose123@cluster0.nt08p.mongodb.net/RishiVerse?retryWrites=true&w=majority";
 
@@ -116,10 +117,10 @@ app.get('/historic-cities', (req, res) => res.render('historic-cities'));
 app.get('/admin', isAdmin, (req, res) => {res.render('admin'); });
 app.get('/ayurveda', (req, res) => {res.render('ayurveda'); });
 app.get('/scientist', (req, res) => {res.render('scientist'); });
-app.get('/flipbook/:filename', (req, res) => {
-  const filename = req.params.filename;
-  res.render('flipbook', { pdfFile: filename });
-});
+app.get('/folkStories', (req, res) => {res.render('folkStories'); });
+app.get('/queen', (req, res) => {res.render('queen'); });
+app.get('/poem', (req, res) => {res.render('poem'); });
+
 // ✅ **Start Server**
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
 
