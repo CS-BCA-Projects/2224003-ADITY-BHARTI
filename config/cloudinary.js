@@ -1,5 +1,6 @@
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
+const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -9,47 +10,51 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const uploadOnCloudinary=async (localFilePath)=>{
+// ✅ Upload function
+const uploadOnCloudinary = async (localFilePath) => {
   try {
-      console.log('Local file path --',localFilePath)
-      if (!localFilePath) {
-          console.log("Local file path not found")
-          return null;
-      } 
-      else {
-        console.log("Local file path found");
-        console.log(localFilePath);
-          // Uploading file to Cloudinary
+    console.log('Local file path --', localFilePath);
+    if (!localFilePath) {
+      console.log("❌ Local file path not found");
+      return null;
+    }
 
-          const uploadresult=await cloudinary.uploader.upload(
-              localFilePath,{
-                  resource_type:'auto',
-                  access_mode: 'public'
-              }
-          )
-          fs.unlinkSync(localFilePath);//to delete file from server
-          console.log("File has uploaded ",uploadresult.url);
-          return uploadresult
-      }
+    const ext = path.extname(localFilePath).toLowerCase();
+    const isPDF = ext === '.pdf';
+
+    const uploadResult = await cloudinary.uploader.upload(localFilePath, {
+      resource_type: isPDF ? 'raw' : 'image',
+      access_mode: 'public',
+      folder: 'uploads'
+    });
+
+    fs.unlinkSync(localFilePath); // Clean local file
+    console.log("✅ File has uploaded:", uploadResult.url);
+    return uploadResult;
+
   } catch (error) {
-      console.log("Failed to upload on Cloudinary")
-      fs.unlinkSync(localFilePath);//to delete file from server
-      return null;
+    console.log("❌ Failed to upload on Cloudinary:", error.message);
+    fs.existsSync(localFilePath) && fs.unlinkSync(localFilePath); // Safe delete
+    return null;
   }
-}
-const deleteOnCloudinary=async (publicId)=>{
+};
+
+// ✅ Delete function
+const deleteOnCloudinary = async (publicId) => {
   try {
-      if (!publicId) {
-          return null;
-      } 
-      else {
-          const deleteresult=await cloudinary.uploader.destroy(publicId)
-          console.log("File has deleted ",deleteresult);  
-          return deleteresult
-      }
+    if (!publicId) return null;
+
+    const deleteResult = await cloudinary.uploader.destroy(publicId, {
+      resource_type: 'auto'
+    });
+
+    console.log("🗑️ File has deleted:", deleteResult);
+    return deleteResult;
+
+  } catch (error) {
+    console.error("❌ Delete failed:", error.message);
+    return null;
   }
-  catch (error) {
-      return null;
-  }   
-}
+};
+
 module.exports = uploadOnCloudinary;
