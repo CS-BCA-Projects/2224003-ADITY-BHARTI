@@ -5,8 +5,6 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const path = require('path');
-const Book = require('./models/book');
-const User = require('./models/User');
 const loginRoutes = require('./routes/login');
 const signRoutes = require('./routes/signup');
 const profileRoutes = require('./routes/profileRoutes');
@@ -51,6 +49,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// ✅ **Error Handling Middleware**
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
+});
 // Routes Setup
 app.use('/api', require('./routes/login'));
 app.use('/api', require('./routes/signup'));
@@ -91,14 +94,7 @@ app.get("/me", (req, res) => {
   }
 });
 
-// ✅ **Error Handling Middleware**
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: "Something went wrong!" });
-});
-
-app.get('/', (req, res) =>
-   res.render('rishis'));
+app.get('/', (req, res) =>res.render('rishis'));
 app.get('/agrarian', (req, res) => res.render('agrarian'));
 app.get('/theNorth', (req, res) => res.render('theNorth'));
 app.get('/fort', (req, res) => res.render('fort'));
