@@ -97,12 +97,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Something went wrong!" });
 });
 
-
-
-
-// ✅ **Render Other Pages**
-
-app.get('/download', (req, res) => res.render('download'));
 app.get('/', (req, res) =>
    res.render('rishis'));
 app.get('/agrarian', (req, res) => res.render('agrarian'));
