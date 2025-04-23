@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Rishiverse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: rgb(255, 253, 247);
+        }
+
+       
+        /* Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 85vh;
+            gap: 50px;
+        }
+
+        /* Left Image Section */
+        .content img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 10px;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .content p {
+            font-size: 14px;
+            color: #191717;
+        }
+
+        /* Login Form */
+        .login {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        .login h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .password-recovery {
+            text-align: right;
+            font-size: 12px;
+            color: #FF5733;
+            text-decoration: none;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .continue-btn {
+            width: 100%;
+            background: #FF5733;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .continue-btn:hover {
+            background: #E64A19;
+        }
+
+        #message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RishiVerse</title>
+
+    <!-- Tailwind CSS & Remix Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Responsive Navigation Bar -->
+    <nav class="w-full bg-red-900 text-white px-6 py-4 shadow-md">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="text-2xl font-bold font-['Pacifico'] tracking-wide">RISHIVERSE</div>
+
+            <!-- Hamburger Icon for mobile -->
+            <button class="md:hidden text-white text-2xl" onclick="toggleMobileMenu()">
+                <i class="ri-menu-line"></i>
+            </button>
+        </div>
+
+        <!-- Nav Links and Search Bar -->
+        <div id="mobileMenu" class="hidden flex-col space-y-4 mt-4 md:mt-0 md:flex md:flex-row md:items-center md:justify-between md:space-y-0">
+            <!-- Navigation Links -->
+            <div class="flex flex-col md:flex-row md:space-x-6 space-y-2 md:space-y-0">
+                <a href="/" class="hover:text-yellow-300">Home</a>
+                <a href="admin" class="hover:text-yellow-300">Admin Dashboard</a>
+                <a href="quiz" class="hover:text-yellow-500">Quiz</a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="relative w-full md:w-80">
+                <input type="text" id="searchInput" placeholder="Search books and categories..."
+                    class="w-full px-4 py-2 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    oninput="searchData()" />
+                <div id="searchResults"
+                    class="absolute bg-white text-black rounded-md mt-1 w-full z-50 hidden max-h-60 overflow-y-auto shadow-lg">
+                    <ul id="resultsList" class="p-2 space-y-2 text-sm"></ul>
+                </div>
+            </div>
+
+            <!-- Authentication Links -->
+            <div id="authLinks" class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                <a href="login" class="hover:text-yellow-300">Login</a>
+                <a href="signup" class="hover:text-yellow-300">Signup</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- JavaScript for Authentication -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const user = JSON.parse(localStorage.getItem("userData"));
+            const authLinks = document.getElementById("authLinks");
+
+            if (user) {
+                authLinks.innerHTML = `
+                    <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                        <a href="profile" class="hover:text-yellow-300">Profile</a>
+                        <button id="logoutBtn" class="text-red-300 hover:text-red-500">Logout</button>
+                        <a href="myCollections" class="hover:text-yellow-300">My Collections</a>
+                    </div>
+                `;
+
+                document.getElementById("logoutBtn").addEventListener("click", function () {
+                    localStorage.removeItem("userData");
+                    location.reload();
+                });
+            }
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobileMenu");
+            menu.classList.toggle("hidden");
+        }
+    </script>
+
+    <!-- JavaScript for Search -->
+    <script>
+        const data = [
+            { name: "Historic Cities of India", link: "/historic-cities" },
+            { name: "Ayurvedas", link: "/ayurvedas" },
+            { name: "Paintings", link: "/paintings" },
+            { name: "Scientist of India", link: "/scientist" },
+            { name: "Vedic Science", link: "/vedic-science" },
+            { name: "audioBooks", link: "/audiobooks" },
+            { name: "Forts of India", link: "/fort" },
+            { name: "Temples of Hosyala", link: "/temples" },
+            { name: "Indian Dance Forms", link: "/dance" },
+            { name: "EBooks", link: "/ebook" },
+        ];
+
+        function searchData() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const results = data.filter(item =>
+                item.name.toLowerCase().includes(input)
+            );
+
+            const resultsList = document.getElementById("resultsList");
+            resultsList.innerHTML = "";
+
+            if (input === "") {
+                document.getElementById("searchResults").classList.add("hidden");
+                return;
+            }
+
+            results.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item.name;
+                li.className = "cursor-pointer hover:bg-gray-100 p-2 rounded";
+                li.onclick = () => {
+                    window.location.href = item.link;
+                };
+                resultsList.appendChild(li);
+            });
+
+            document.getElementById("searchResults").classList.remove("hidden");
+        }
+    </script>
+</body>
+
+</html>
+ 
+
+    <div class="container">
+        <!-- Left Image Section -->
+        <div class="content">
+            <img src="/images/image.png" alt="Illustration">
+            <h2>Immersive Reading Mode</h2>
+            <p>A synchronized ebook and audiobook feature where users can listen to the narration while the text is highlighted, offering a seamless reading and listening experience.</p>
+        </div>
+
+        <!-- Right Login Section -->
+        <div class="login">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" id="email" class="input-field" placeholder="Email address" required>
+                <input type="password" id="password" class="input-field" placeholder="Password" required>
+                <a href="forgot-password" class="password-recovery">Forgot Password?</a>
+                <button type="submit" class="continue-btn">Login</button>
+            </form>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const text = await response.text();
+
+                if (response.ok) {
+                    const result = JSON.parse(text);
+                    messageDiv.textContent = result.message;
+                    messageDiv.style.color = 'green';
+
+                    localStorage.setItem("userData", JSON.stringify({ email }));
+
+                    setTimeout(() => {
+                        window.location.href = result.redirectUrl || '/rishis';
+                    }, 1000);
+                    alert(result.message);
+                        window.location.href = result.redirectUrl;
+                } else {
+                    try {
+                        const error = JSON.parse(text);
+                        messageDiv.textContent = error.error || 'Login failed';
+                    } catch {
+                        messageDiv.textContent = 'Unexpected error occurred';
+                    }
+                    messageDiv.style.color = 'red';
+                }
+            } catch (err) {
+                messageDiv.textContent = 'Could not connect to server';
+                messageDiv.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
